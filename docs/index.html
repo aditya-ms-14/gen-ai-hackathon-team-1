@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Citation Auditor · PS 99</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root{--bg:#f4efe6;--card:#fbf8f2;--ink:#1d2320;--mute:#6b706a;--line:#d9d2c3;--ok:#2d6a4f;--okbg:#dcebdf;--bad:#b3261e;--badbg:#f6dcd8;--warn:#9a6a00;--warnbg:#f6e8c3;--acc:#1d2320;--hl:#efe4c4;color-scheme:light;
+--serif:"Fraunces",Georgia,serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141816;--card:#1c211e;--ink:#ece7da;--mute:#9aa096;--line:#323a35;--ok:#7fd1a0;--okbg:#1f3a2b;--bad:#ff8b80;--badbg:#401f1b;--warn:#e8bb55;--warnbg:#3b3014;--acc:#ece7da;--hl:#2e2b1a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#141816;--card:#1c211e;--ink:#ece7da;--mute:#9aa096;--line:#323a35;--ok:#7fd1a0;--okbg:#1f3a2b;--bad:#ff8b80;--badbg:#401f1b;--warn:#e8bb55;--warnbg:#3b3014;--acc:#ece7da;--hl:#2e2b1a;color-scheme:dark}
+*{box-sizing:border-box}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 var(--serif)}
+.mono{font-family:var(--mono);font-size:12px}
+header{display:flex;align-items:center;gap:16px;padding:14px 24px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.brand{font-weight:700;font-size:20px;letter-spacing:-.01em}.brand small{font-family:var(--mono);font-weight:400;color:var(--mute);margin-left:8px;font-size:11px}
+nav{display:flex;gap:4px;margin-left:auto}
+nav button,.btn{font:600 12px var(--mono);border:1px solid var(--line);background:transparent;color:var(--ink);padding:8px 14px;cursor:pointer;border-radius:2px}
+nav button[aria-current="true"],.btn.pri{background:var(--acc);color:var(--bg);border-color:var(--acc)}
+main{max-width:1280px;margin:0 auto;padding:24px}
+h1{font-size:34px;line-height:1.1;margin:0 0 6px;letter-spacing:-.02em}
+.sub{color:var(--mute);margin:0 0 24px;max-width:60ch}
+.view{display:none}.view.on{display:block}
+.drop{border:1.5px dashed var(--mute);background:var(--card);padding:36px;text-align:center;border-radius:4px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.steps{display:flex;gap:0;margin:24px 0;flex-wrap:wrap}
+.steps div{flex:1;min-width:130px;padding:10px 12px;border-top:3px solid var(--line);font:12px var(--mono);color:var(--mute)}
+.steps div.d{border-color:var(--ok);color:var(--ink)}.steps div.a{border-color:var(--acc);color:var(--ink);font-weight:600}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.stat{background:var(--card);border:1px solid var(--line);padding:12px 14px}.stat b{display:block;font-size:28px;line-height:1.1}.stat span{font:11px var(--mono);color:var(--mute);text-transform:uppercase}
+.split{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:20px}
+.panel{background:var(--card);border:1px solid var(--line);padding:20px;border-radius:2px}
+.panel h3{margin:0 0 12px;font:600 11px var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--mute)}
+.report p{margin:0 0 14px;font-size:16px;line-height:1.7}
+.claim{background:var(--hl);border-bottom:2px solid var(--mute);cursor:pointer;padding:1px 2px}
+.claim[data-s="ok"]{border-color:var(--ok)}.claim[data-s="bad"]{border-color:var(--bad)}.claim[data-s="warn"]{border-color:var(--warn)}
+.claim[aria-pressed="true"]{outline:2px solid var(--ink);outline-offset:1px}
+.pill{display:inline-block;font:600 11px var(--mono);padding:3px 8px;border-radius:2px}
+.pill.ok{background:var(--okbg);color:var(--ok)}.pill.bad{background:var(--badbg);color:var(--bad)}.pill.warn{background:var(--warnbg);color:var(--warn)}
+table{width:100%;border-collapse:collapse;font:12px var(--mono);margin:8px 0}
+td,th{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line)}th{color:var(--mute);font-weight:400}
+.quote{border-left:3px solid var(--acc);padding:6px 12px;margin:10px 0;font-style:italic}
+.bar{height:6px;background:var(--line);margin:6px 0 12px}.bar i{display:block;height:100%;background:var(--acc)}
+.page{background:#fff;color:#222;padding:18px;font:12px/1.6 var(--mono);border:1px solid var(--line);min-height:120px}
+.page mark{background:#ffe27a;color:#000}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+@media (max-width:860px){.split,.grid2{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}main{padding:16px}nav{margin-left:0;width:100%}nav button{flex:1}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">Citation Auditor<small>PS 99 · environmental reports</small></div>
+  <nav aria-label="Views">
+    <button data-v="upload" aria-current="true">1 · Upload</button>
+    <button data-v="audit">2 · Audit</button>
+    <button data-v="export">3 · Export</button>
+  </nav>
+</header>
+<main>
+
+<section class="view on" id="upload">
+  <h1>Check every claim against its evidence.</h1>
+  <p class="sub">Upload the draft report and the evidence files behind it. Numbers are verified by code, not by the language model.</p>
+  <div class="grid2">
+    <div class="drop"><div style="font-size:28px">▤</div><b>Draft report</b><p class="mono" style="color:var(--mute)">PDF · DOCX · drag here</p><button class="btn">Choose file</button></div>
+    <div class="drop"><div style="font-size:28px">▦</div><b>Evidence files</b><p class="mono" style="color:var(--mute)">PDF · XLSX · CSV · multiple</p><button class="btn">Choose files</button></div>
+  </div>
+  <div class="steps" aria-label="Pipeline progress">
+    <div class="d">✓ Ingest evidence</div><div class="d">✓ Build ledger + index</div><div class="a">● Parse claims</div><div>Resolve evidence</div><div>Verify + score</div>
+  </div>
+  <div class="row"><button class="btn pri" id="go">Verify all claims →</button><span class="mono" style="align-self:center;color:var(--mute)">Model: Gemini API · fallback LM Studio</span></div>
+</section>
+
+<section class="view" id="audit">
+  <div class="stats">
+    <div class="stat"><b>24</b><span>Claims found</span></div>
+    <div class="stat"><b style="color:var(--ok)">17</b><span>Verified</span></div>
+    <div class="stat"><b style="color:var(--bad)">4</b><span>Mismatch</span></div>
+    <div class="stat"><b style="color:var(--warn)">3</b><span>Vague / greenwash</span></div>
+  </div>
+  <div class="split">
+    <div class="panel report"><h3>Report · click a highlighted claim</h3>
+      <p>Our operations delivered strong results this year. <span class="claim" data-s="ok" data-i="0" role="button" tabindex="0" aria-pressed="true">Scope 1 emissions fell 18% from 2019 to 2023.</span> Meanwhile, <span class="claim" data-s="bad" data-i="1" role="button" tabindex="0" aria-pressed="false">water withdrawal was 4.2 million m³ in 2023.</span></p>
+      <p><span class="claim" data-s="ok" data-i="2" role="button" tabindex="0" aria-pressed="false">Renewable energy reached 62% of electricity use.</span> <span class="claim" data-s="warn" data-i="3" role="button" tabindex="0" aria-pressed="false">We are committed to a greener future for all.</span></p>
+    </div>
+    <div class="panel" id="detail" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="view" id="export">
+  <h1>Audit report ready.</h1>
+  <p class="sub">PDF or CSV with every verdict, calculation and source citation.</p>
+  <div class="panel"><table><tr><th>Format</th><th>Contents</th><th></th></tr>
+  <tr><td>PDF</td><td>Narrated verdicts, citations, page links</td><td><button class="btn pri">Download</button></td></tr>
+  <tr><td>CSV</td><td>Claim · verdict · evidence · score</td><td><button class="btn">Download</button></td></tr></table></div>
+</section>
+</main>
+<script>
+var D=[
+{s:"ok",v:"Verified",c:.96,src:"ledger",calc:"(98,728 − 120,400) ÷ 120,400 = −18.0%",rows:[["Scope 1","2019","120,400","tCO₂e","p.42"],["Scope 1","2023","98,728","tCO₂e","p.42"]],q:"Scope 1 emissions: 98,728 tCO₂e in 2023, against a 2019 baseline of 120,400.",pg:"p.42",hl:"98,728 tCO₂e"},
+{s:"bad",v:"Mismatch",c:.91,src:"ledger",calc:"Report 4.2M m³ vs evidence 4.9M m³ → Δ 14.3% (tolerance 1%)",rows:[["Water withdrawal","2023","4,900,000","m³","p.57"]],q:"Total water withdrawal in 2023 was 4.9 million cubic metres.",pg:"p.57",hl:"4.9 million cubic metres"},
+{s:"ok",v:"Supported (RAG)",c:.74,src:"RAG fallback",calc:"Ledger miss → hybrid retrieval, cross-encoder rank #1",rows:[["Renewable share","2023","62","%","p.31"]],q:"Renewable sources supplied 62% of total electricity consumed.",pg:"p.31",hl:"62% of total electricity"},
+{s:"warn",v:"Vague claim",c:.2,src:"none",calc:"No measurable value or unit to verify",rows:[],q:"No supporting passage found. Flagged: unquantified aspirational language.",pg:"—",hl:""}];
+var P={ok:"ok",bad:"bad",warn:"warn"};
+function show(i){var d=D[i];
+ document.querySelectorAll(".claim").forEach(function(e){e.setAttribute("aria-pressed",e.dataset.i==i)});
+ var rows=d.rows.length?"<table><tr><th>Indicator</th><th>Year</th><th>Value</th><th>Unit</th><th>Page</th></tr>"+d.rows.map(function(r){return "<tr>"+r.map(function(x){return "<td>"+x+"</td>"}).join("")+"</tr>"}).join("")+"</table>":"";
+ document.getElementById("detail").innerHTML='<h3>Claim detail</h3><span class="pill '+P[d.s]+'">'+d.v+'</span> <span class="mono" style="color:var(--mute)">via '+d.src+'</span>'+
+ '<h3 style="margin-top:18px">Evidence score · '+Math.round(d.c*100)+'%</h3><div class="bar"><i style="width:'+d.c*100+'%"></i></div>'+
+ '<h3>Calculation (no LLM math)</h3><div class="mono">'+d.calc+'</div>'+rows+
+ '<h3 style="margin-top:14px">Citation guard · source '+d.pg+'</h3><div class="quote">'+d.q+'</div>'+
+ '<div class="page">…'+(d.hl?d.q.replace(d.hl,"<mark>"+d.hl+"</mark>"):d.q)+'…</div>'+
+ '<div class="row"><button class="btn">Open source page</button><button class="btn">Mark reviewed</button></div>';}
+document.querySelectorAll(".claim").forEach(function(e){e.onclick=function(){show(e.dataset.i)};e.onkeydown=function(k){if(k.key=="Enter"||k.key==" "){k.preventDefault();show(e.dataset.i)}}});
+function view(v){document.querySelectorAll(".view").forEach(function(e){e.classList.toggle("on",e.id==v)});document.querySelectorAll("nav button").forEach(function(b){b.setAttribute("aria-current",b.dataset.v==v)});}
+document.querySelectorAll("nav button").forEach(function(b){b.onclick=function(){view(b.dataset.v)}});
+document.getElementById("go").onclick=function(){view("audit")};
+show(0);
+</script>
+</body>
+</html>
