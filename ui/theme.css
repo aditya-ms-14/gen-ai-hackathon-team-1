@@ -1,0 +1,74 @@
+/* Citation Auditor · Streamlit skin from the team's HTML design (ui-design.html).
+   Colour tokens (--ps-*) are prepended by ui/theme.py for the active light/dark palette. */
+:root{--ps-serif:"Fraunces",Georgia,serif;--ps-mono:"JetBrains Mono",ui-monospace,Menlo,monospace}
+
+/* Page frame */
+.stApp{background:var(--ps-bg);color:var(--ps-ink)}
+[data-testid="stMainBlockContainer"],.block-container{max-width:1280px;padding-top:4.25rem;padding-bottom:3rem}
+.stApp,.stApp p,.stApp li,.stApp label{font-family:var(--ps-serif)}
+.stApp code,.stApp pre{font-family:var(--ps-mono)}
+
+/* Header + nav */
+.st-key-ps_header{border-bottom:1px solid var(--ps-line);padding-bottom:12px;margin-bottom:12px}
+.ps-brand{font:700 20px/1.2 var(--ps-serif);letter-spacing:-.01em;color:var(--ps-ink)}
+.ps-brand small{font:400 11px var(--ps-mono);color:var(--ps-mute);margin-left:8px}
+
+/* Buttons: mono, square, ink primary (design .btn / .btn.pri / nav button[aria-current]) */
+.stButton button,.stDownloadButton button,.stLinkButton a{font-family:var(--ps-mono)!important;border-radius:2px!important;
+  border:1px solid var(--ps-line)!important;padding:8px 14px!important;min-height:0!important;box-shadow:none!important}
+.stButton button p,.stDownloadButton button p,.stLinkButton a p{font:600 12px var(--ps-mono)!important}
+.stButton button[kind="secondary"],.stDownloadButton button[kind="secondary"],
+[data-testid="stBaseButton-secondary"]{background:transparent!important;color:var(--ps-ink)!important}
+.stButton button[kind="secondary"]:hover,[data-testid="stBaseButton-secondary"]:hover{border-color:var(--ps-ink)!important}
+.stButton button[kind="primary"],.stDownloadButton button[kind="primary"],
+[data-testid="stBaseButton-primary"]{background:var(--ps-acc)!important;color:var(--ps-bg)!important;border-color:var(--ps-acc)!important}
+.stButton button[kind="primary"] p,[data-testid="stBaseButton-primary"] p{color:var(--ps-bg)!important}
+.stButton button:focus-visible,.stDownloadButton button:focus-visible{outline:2px solid var(--ps-ink)!important;outline-offset:2px}
+
+/* Typography blocks rendered with st.markdown */
+.stApp .ps-h1{font:700 34px/1.1 var(--ps-serif);letter-spacing:-.02em;margin:8px 0 6px;padding:0;color:var(--ps-ink)}
+.ps-sub{color:var(--ps-mute);margin:0 0 20px;max-width:60ch;font-size:15px;line-height:1.5}
+.ps-mono,.stApp p.ps-mono,.stApp .ps-mono{font:12px/1.5 var(--ps-mono)}
+.ps-mute,.stApp .ps-mute{color:var(--ps-mute)}
+.ps-h3{margin:18px 0 8px;font:600 11px var(--ps-mono);text-transform:uppercase;letter-spacing:.08em;color:var(--ps-mute)}
+
+/* Drop zones (design .drop) wrapping st.file_uploader */
+.st-key-drop_report,.st-key-drop_evidence{border:1.5px dashed var(--ps-mute);background:var(--ps-card);
+  padding:24px 20px 14px;text-align:center;border-radius:4px}
+.ps-drop-icon{font-size:28px;line-height:1.2}
+.ps-drop b{font-size:16px}
+.ps-drop p{margin:4px 0 0}
+[data-testid="stFileUploaderDropzone"]{background:transparent!important;border:1px solid var(--ps-line)!important;border-radius:2px!important}
+[data-testid="stFileUploaderDropzone"] button{font:600 12px var(--ps-mono)!important;border-radius:2px!important}
+
+/* Pipeline step bar (design .steps) */
+.ps-steps{display:flex;gap:0;margin:20px 0 14px;flex-wrap:wrap}
+.ps-steps div{flex:1;min-width:130px;padding:10px 12px;border-top:3px solid var(--ps-line);font:12px var(--ps-mono);color:var(--ps-mute)}
+.ps-steps div.d{border-color:var(--ps-ok);color:var(--ps-ink)}
+.ps-steps div.a{border-color:var(--ps-acc);color:var(--ps-ink);font-weight:600}
+.ps-steps small{display:block;color:var(--ps-mute);font-weight:400}
+
+/* Stat tiles (design .stats / .stat) */
+.ps-stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin:4px 0 14px}
+.ps-stat{background:var(--ps-card);border:1px solid var(--ps-line);padding:12px 14px}
+.ps-stat b{display:block;font:500 28px/1.1 var(--ps-serif);color:var(--ps-ink)}
+.ps-stat b.ok{color:var(--ps-ok)}.ps-stat b.bad{color:var(--ps-bad)}.ps-stat b.warn{color:var(--ps-warn)}
+.ps-stat span{font:11px var(--ps-mono);color:var(--ps-mute);text-transform:uppercase}
+
+/* Panels + export table (design .panel / table) */
+.st-key-export_panel{background:var(--ps-card);border:1px solid var(--ps-line);padding:16px 20px;border-radius:2px}
+.ps-th{font:12px var(--ps-mono);color:var(--ps-mute);padding:4px 0;border-bottom:1px solid var(--ps-line)}
+.ps-td{font:12px var(--ps-mono);color:var(--ps-ink);padding:8px 0}
+.ps-pill{display:inline-block;font:600 11px var(--ps-mono);padding:3px 8px;border-radius:2px}
+.ps-pill.ok{background:var(--ps-okbg);color:var(--ps-ok)}.ps-pill.bad{background:var(--ps-badbg);color:var(--ps-bad)}
+.ps-pill.warn{background:var(--ps-warnbg);color:var(--ps-warn)}
+
+/* Expander + dataframe frame */
+[data-testid="stExpander"] details{border-color:var(--ps-line)!important;border-radius:2px!important;background:var(--ps-card)}
+[data-testid="stExpander"] summary p{font:600 12px var(--ps-mono)!important}
+[data-testid="stDataFrame"]{border:1px solid var(--ps-line);border-radius:2px}
+
+@media (max-width:860px){
+  .ps-stats{grid-template-columns:1fr 1fr}
+  .ps-h1{font-size:28px}
+}
