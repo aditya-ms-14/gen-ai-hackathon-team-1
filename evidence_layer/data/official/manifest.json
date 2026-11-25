@@ -1,0 +1,301 @@
+{
+  "built_at": "2026-11-25T05:34:21Z",
+  "entities": [
+    "DEU",
+    "IND",
+    "USA",
+    "GBR",
+    "FRA",
+    "CHN",
+    "BRA",
+    "WLD",
+    "EUU"
+  ],
+  "years": [
+    1990,
+    2000,
+    2005,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023
+  ],
+  "line_format": "series,entity,year,value,unit",
+  "sources": [
+    {
+      "name": "World Bank WDI",
+      "file": "world_bank_wdi.csv",
+      "endpoint": "https://api.worldbank.org/v2/country/{iso3}/indicator/{code}?format=json",
+      "home": "https://data.worldbank.org/",
+      "indicators": {
+        "ghg_emissions": [
+          {
+            "series": "EN.GHG.ALL.MT.CE.AR5",
+            "unit": "Mt CO2e"
+          }
+        ],
+        "co2_emissions": [
+          {
+            "series": "EN.GHG.CO2.MT.CE.AR5",
+            "unit": "Mt CO2e"
+          }
+        ],
+        "renewable_share": [
+          {
+            "series": "EG.FEC.RNEW.ZS",
+            "unit": "%"
+          }
+        ],
+        "renewable_electricity_share": [
+          {
+            "series": "EG.ELC.RNEW.ZS",
+            "unit": "%"
+          }
+        ],
+        "water_withdrawal": [
+          {
+            "series": "ER.H2O.FWTL.K3",
+            "unit": "billion m3"
+          }
+        ],
+        "forest_area_share": [
+          {
+            "series": "AG.LND.FRST.ZS",
+            "unit": "%"
+          }
+        ]
+      },
+      "rows": 855,
+      "entities": [
+        "BRA",
+        "CHN",
+        "DEU",
+        "EUU",
+        "FRA",
+        "GBR",
+        "IND",
+        "USA",
+        "WLD"
+      ],
+      "no_data": [],
+      "failures": []
+    },
+    {
+      "name": "Our World in Data",
+      "file": "our_world_in_data.csv",
+      "endpoint": "https://raw.githubusercontent.com/owid/co2-data/master/owid-co2-data.csv; https://raw.githubusercontent.com/owid/energy-data/master/owid-energy-data.csv",
+      "home": "https://github.com/owid/co2-data",
+      "indicators": {
+        "co2_emissions": [
+          {
+            "series": "co2",
+            "unit": "Mt CO2"
+          }
+        ],
+        "ghg_emissions": [
+          {
+            "series": "total_ghg_excluding_lucf",
+            "unit": "Mt CO2e"
+          }
+        ],
+        "renewable_share": [
+          {
+            "series": "renewables_share_energy",
+            "unit": "%"
+          }
+        ],
+        "renewable_electricity_share": [
+          {
+            "series": "renewables_share_elec",
+            "unit": "%"
+          }
+        ],
+        "energy_consumption": [
+          {
+            "series": "primary_energy_consumption",
+            "unit": "TWh"
+          }
+        ]
+      },
+      "rows": 765,
+      "entities": [
+        "BRA",
+        "CHN",
+        "DEU",
+        "EUU",
+        "FRA",
+        "GBR",
+        "IND",
+        "USA",
+        "WLD"
+      ],
+      "no_data": [],
+      "failures": []
+    },
+    {
+      "name": "WRI Climate Watch",
+      "file": "wri_climate_watch.csv",
+      "endpoint": "https://www.climatewatchdata.org/api/v1/data/historical_emissions",
+      "home": "https://www.climatewatchdata.org/ghg-emissions",
+      "indicators": {
+        "ghg_emissions": [
+          {
+            "series": "CW.ALL_GHG.TOTAL_EXCL_LULUCF",
+            "unit": "MtCO2e"
+          }
+        ],
+        "co2_emissions": [
+          {
+            "series": "CW.CO2.TOTAL_EXCL_LULUCF",
+            "unit": "MtCO2e"
+          }
+        ]
+      },
+      "rows": 238,
+      "entities": [
+        "BRA",
+        "CHN",
+        "DEU",
+        "FRA",
+        "GBR",
+        "IND",
+        "USA"
+      ],
+      "no_data": [],
+      "failures": []
+    },
+    {
+      "name": "UNFCCC GHG inventories",
+      "file": "unfccc_ghg_inventories.csv",
+      "endpoint": "https://www.climatewatchdata.org/api/v1/data/historical_emissions (source_ids 276 UNFCCC_AI, 277 UNFCCC_NAI)",
+      "home": "https://di.unfccc.int/time_series",
+      "indicators": {
+        "ghg_emissions": [
+          {
+            "series": "UNFCCC_AI.GHG.TOTAL_EXCL_LULUCF",
+            "unit": "MtCO2e"
+          },
+          {
+            "series": "UNFCCC_NAI.GHG.TOTAL_EXCL_LULUCF",
+            "unit": "MtCO2e"
+          }
+        ],
+        "co2_emissions": [
+          {
+            "series": "UNFCCC_AI.CO2.TOTAL_EXCL_LULUCF",
+            "unit": "MtCO2e"
+          },
+          {
+            "series": "UNFCCC_NAI.CO2.TOTAL_EXCL_LULUCF",
+            "unit": "MtCO2e"
+          }
+        ]
+      },
+      "rows": 154,
+      "entities": [
+        "BRA",
+        "CHN",
+        "DEU",
+        "FRA",
+        "GBR",
+        "IND",
+        "USA"
+      ],
+      "no_data": [
+        "UNFCCC_AI.CO2.TOTAL_EXCL_LULUCF/IND",
+        "UNFCCC_AI.CO2.TOTAL_EXCL_LULUCF/CHN",
+        "UNFCCC_AI.CO2.TOTAL_EXCL_LULUCF/BRA",
+        "UNFCCC_AI.GHG.TOTAL_EXCL_LULUCF/IND",
+        "UNFCCC_AI.GHG.TOTAL_EXCL_LULUCF/CHN",
+        "UNFCCC_AI.GHG.TOTAL_EXCL_LULUCF/BRA",
+        "UNFCCC_NAI.CO2.TOTAL_EXCL_LULUCF/DEU",
+        "UNFCCC_NAI.CO2.TOTAL_EXCL_LULUCF/USA",
+        "UNFCCC_NAI.CO2.TOTAL_EXCL_LULUCF/GBR",
+        "UNFCCC_NAI.CO2.TOTAL_EXCL_LULUCF/FRA",
+        "UNFCCC_NAI.GHG.TOTAL_EXCL_LULUCF/DEU",
+        "UNFCCC_NAI.GHG.TOTAL_EXCL_LULUCF/USA",
+        "UNFCCC_NAI.GHG.TOTAL_EXCL_LULUCF/GBR",
+        "UNFCCC_NAI.GHG.TOTAL_EXCL_LULUCF/FRA"
+      ],
+      "failures": []
+    },
+    {
+      "name": "UNEP (UN SDG Global Database)",
+      "file": "unep_sdg.csv",
+      "endpoint": "https://unstats.un.org/sdgapi/v1/sdg/Series/Data",
+      "home": "https://unstats.un.org/sdgs/dataportal",
+      "indicators": {
+        "waste": [
+          {
+            "series": "EN_MWT_GENV",
+            "unit": "tonnes"
+          }
+        ]
+      },
+      "rows": 64,
+      "entities": [
+        "DEU",
+        "FRA",
+        "GBR",
+        "IND",
+        "USA"
+      ],
+      "no_data": [
+        "EN_MWT_GENV/CHN",
+        "EN_MWT_GENV/BRA",
+        "EN_MWT_GENV/WLD"
+      ],
+      "failures": []
+    },
+    {
+      "name": "European Environment Agency",
+      "file": "eea_country_profiles.csv",
+      "endpoint": "https://www.eea.europa.eu/++api++/en/europe-environment-2025/countries/{country}/{chart}",
+      "home": "https://www.eea.europa.eu/en/europe-environment-2025/countries",
+      "indicators": {
+        "renewable_share": [
+          {
+            "series": "EEA-SOE2025.renewable-energy-sources",
+            "unit": "%"
+          }
+        ],
+        "ghg_emissions": [
+          {
+            "series": "EEA-SOE2025.total-greenhouse-gas-emissions",
+            "unit": "index 1990=100"
+          }
+        ],
+        "energy_consumption": [
+          {
+            "series": "EEA-SOE2025.final-energy-consumption",
+            "unit": "index 2005=100"
+          }
+        ],
+        "waste": [
+          {
+            "series": "EEA-SOE2025.waste-generation",
+            "unit": "index 2010=100"
+          }
+        ]
+      },
+      "rows": 162,
+      "entities": [
+        "DEU",
+        "EUU",
+        "FRA"
+      ],
+      "no_data": [],
+      "failures": []
+    }
+  ]
+}
