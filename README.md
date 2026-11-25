@@ -4,6 +4,8 @@ Checks every claim in a sustainability report against evidence and labels it **S
 
 **Team:** Aditya M S · Sibi Subhash · Fathima Rena · Kanishkar P S (B.Tech AI/ML)
 
+**Final presentation:** [`docs/review3/PS99_Final_Presentation.pptx`](docs/review3/PS99_Final_Presentation.pptx) ([PDF](docs/review3/PS99_Final_Presentation.pdf))
+
 ## Quick start (Windows)
 
 ```powershell
@@ -31,6 +33,7 @@ In the app: **Run problem-statement sample**, **Run country demo**, or upload a 
 | Official data sources | `evidence_layer/sources/` (World Bank, OWID, WRI, UNFCCC, UNEP, EEA), `evidence_layer/scripts/fetch_official_data.py`, snapshots in `evidence_layer/data/official/` | |
 | Evaluation | `scripts/evaluate.py`, `scripts/compare_llms.py`, answer keys in `data/samples/` | `docs/evaluation.md`, `docs/llm_comparison.md` |
 | UI | `ui/app.py`, `ui/audit_view.py`, `ui/report.py` (PDF/CSV export) | `docs/ui-ux.html` (team design) |
+| Final presentation | | `docs/review3/PS99_Final_Presentation.pptx` (and `.pdf`) |
 | Review documents | | `docs/review2/` (report, slide deck, screenshots) |
 
 ## Repository layout
