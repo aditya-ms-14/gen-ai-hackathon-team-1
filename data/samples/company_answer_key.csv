@@ -1,0 +1,16 @@
+claim_id,expected_status,expected_computed,expected_flags,why,source
+C01,Supported,-12.0,,12000 -> 10560 tCO2e is -12.0%; claimed -12% (within 1.0 pp),company_report_2024.pdf p.2 | Scope 1 emissions fell by 12% from 2022 to 2024.
+C02,Supported,-18.0,,200000 -> 164000 kL is -18.0%; claimed -18% (within 1.0 pp),company_report_2024.pdf p.2 | Water consumption was reduced by 18% compared with 2023.
+C03,Supported,45.0,,2024 renewable electricity share is 45%; claimed 45%,company_report_2024.pdf p.2 | Renewable electricity reached 45% of total electricity use in 2024.
+C04,Supported,-5.0,,90000 -> 85500 MWh is -5.0%; claimed -5% (within 1.0 pp),company_report_2024.pdf p.2 | Energy consumption fell by 5% from 2022 to 2024.
+C05,Contradicted,-12.0,,5000 -> 4400 tonnes is -12.0%; claimed -20%,company_report_2024.pdf p.3 | Waste generated decreased by 20% compared with 2022.
+C06,Contradicted,45.0,,2024 renewable electricity share is 45%; claimed 55%,company_report_2024.pdf p.3 | Renewable electricity rose from 30% in 2022 to 55% in 2024.
+C07,Contradicted,4400.0,,"recorded 2024 waste is 4400 tonnes; claimed 4900 (11% off, beyond 2% tolerance)","company_report_2024.pdf p.3 | Waste generated totalled 4,900 tonnes in 2024."
+C08,Supported,10560.0,,recorded 2024 Scope 1 emissions are 10560 tCO2e; claimed 10560,"company_report_2024.pdf p.3 | Scope 1 emissions were 10,560 tCO2e in 2024."
+C09,Unsupported,,conflict,"PDF table says 360000 kL for 2024, XLSX says 395000 kL: sources disagree",company_report_2024.pdf p.3 | Freshwater withdrawal fell by 10% from 2022 to 2024.
+C10,Unsupported,,,no CO2 emissions indicator in any evidence file,company_report_2024.pdf p.4 | CO2 emissions from logistics fell by 25% compared with 2022.
+C11,Unsupported,,,no 2019 water consumption data,company_report_2024.pdf p.4 | Water consumption fell by 30% compared with 2019.
+C12,Unsupported,,,no land restored data in any evidence file,company_report_2024.pdf p.4 | Land restored reached 120 hectares in 2024.
+C13,Unsupported,,,"future target, nothing to check yet",company_report_2024.pdf p.4 | Renewable electricity will reach 80% by 2030.
+C14,Unsupported,,greenwash,vague claim with no number or baseline,company_report_2024.pdf p.4 | Our operations are eco-friendly and environmentally responsible.
+C15,Unsupported,,greenwash,net zero with no target year,company_report_2024.pdf p.4 | We are committed to net zero.
