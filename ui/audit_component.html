@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en"__THEME_ATTR__>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="__FONTS_URL__">
+<style>
+:root{__LIGHT_VARS__;color-scheme:light;--serif:"Fraunces",Georgia,serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){__DARK_VARS__;color-scheme:dark}}
+:root[data-theme="dark"]{__DARK_VARS__;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 var(--serif)}
+.mono{font-family:var(--mono);font-size:12px}
+.mute{color:var(--mute)}
+.split{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:20px;align-items:start;padding:2px}
+.panel{background:var(--card);border:1px solid var(--line);padding:20px;border-radius:2px;max-height:__PANEL_MAX__px;overflow:auto}
+.panel h3{margin:0 0 12px;font:600 11px var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--mute)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin:-4px 0 14px;font:11px var(--mono);color:var(--mute)}
+.legend i{display:inline-block;width:14px;height:0;border-bottom:2px solid;margin-right:6px;vertical-align:middle}
+.legend .ok i{border-color:var(--ok)}.legend .bad i{border-color:var(--bad)}.legend .warn i{border-color:var(--warn)}
+.report p{margin:0 0 14px;font-size:16px;line-height:1.7;white-space:pre-line}
+.pgno{font:600 11px var(--mono);color:var(--mute);border-top:1px solid var(--line);padding-top:8px;margin:18px 0 8px}
+.pgno:first-of-type{border-top:0;margin-top:0;padding-top:0}
+.claim{background:var(--hl);border-bottom:2px solid var(--mute);cursor:pointer;padding:1px 2px}
+.claim[data-s="ok"]{border-color:var(--ok)}.claim[data-s="bad"]{border-color:var(--bad)}.claim[data-s="warn"]{border-color:var(--warn)}
+.claim[aria-pressed="true"]{outline:2px solid var(--ink);outline-offset:1px}
+.claim:focus-visible{outline:2px dashed var(--ink);outline-offset:2px}
+.claim[data-r="1"]::after{content:" \2713";font:600 11px var(--mono);color:var(--ok)}
+.unplaced{margin-top:18px;border-top:1px solid var(--line);padding-top:12px}
+.unplaced .claim{display:inline-block;margin:0 6px 8px 0;font-size:14px}
+.pill{display:inline-block;font:600 11px var(--mono);padding:3px 8px;border-radius:2px}
+.pill.ok{background:var(--okbg);color:var(--ok)}.pill.bad{background:var(--badbg);color:var(--bad)}.pill.warn{background:var(--warnbg);color:var(--warn)}
+.flag{display:inline-block;font:11px var(--mono);border:1px solid var(--line);padding:2px 6px;margin:0 4px 0 0;border-radius:2px;color:var(--mute)}
+.flag.warn{border-color:var(--warn);color:var(--warn)}.flag.bad{border-color:var(--bad);color:var(--bad)}
+.ctext{font-size:17px;line-height:1.45;margin:12px 0 6px}
+.expl{color:var(--ink);margin:6px 0 0;font-size:14px}
+table{width:100%;border-collapse:collapse;font:12px var(--mono);margin:8px 0}
+td,th{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mute);font-weight:400}
+.quote{border-left:3px solid var(--acc);padding:6px 12px;margin:10px 0;font-style:italic;overflow-wrap:anywhere}
+.bar{height:6px;background:var(--line);margin:6px 0 12px}.bar i{display:block;height:100%;background:var(--acc)}
+.page{background:#fff;color:#222;padding:18px;font:12px/1.6 var(--mono);border:1px solid var(--line);min-height:60px;white-space:pre-wrap;overflow-wrap:anywhere}
+.page mark{background:#ffe27a;color:#000}
+.page .qs{background:#fff3c4;box-shadow:inset 0 -1px 0 #c9a227}
+.viewer{margin-top:10px}
+.viewer img{display:block;max-width:100%;border:1px solid var(--line);background:#fff}
+.viewer .page{max-height:420px;overflow:auto}
+.cap{font:11px var(--mono);color:var(--mute);margin:6px 0 0}
+.g-ok{color:var(--ok)}.g-bad{color:var(--bad)}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}
+.btn{font:600 12px var(--mono);border:1px solid var(--line);background:transparent;color:var(--ink);padding:8px 14px;cursor:pointer;border-radius:2px;text-decoration:none;display:inline-block}
+.btn:hover{border-color:var(--ink)}
+.btn.pri{background:var(--acc);color:var(--bg);border-color:var(--acc)}
+.btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.spacer{flex:1}
+.empty{color:var(--mute);font-style:italic}
+@media (max-width:860px){.split{grid-template-columns:1fr}.panel{max-height:none}}
+</style>
+</head>
+<body>
+<div class="split">
+  <div class="panel report" id="report"><h3>Report · click a highlighted claim</h3></div>
+  <div class="panel" id="detail" aria-live="polite"></div>
+</div>
+<script id="ps-data" type="application/json">__DATA__</script>
+<script>
+(function(){
+"use strict";
+var D=JSON.parse(document.getElementById("ps-data").textContent);
+var reviewed={},cur=-1;
+function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=String(text);return e;}
+function h3(text,extra){var h=el("h3",null,text);if(extra)h.style.marginTop=extra;return h;}
+function segs(parent,list){(list||[]).forEach(function(s){
+  if(s.m){parent.appendChild(el("mark",null,s.t));}
+  else if(s.q){parent.appendChild(el("span","qs",s.t));}
+  else{parent.appendChild(document.createTextNode(s.t));}
+});return parent;}
+function safeUrl(u){return typeof u==="string"&&/^https?:\/\//i.test(u)?u:null;}
+function safeImg(u){return typeof u==="string"&&/^data:image\/(png|jpeg);base64,/.test(u)?u:null;}
+
+/* ---------- report panel ---------- */
+var rep=document.getElementById("report");
+var leg=el("div","legend");
+[["ok","Supported"],["bad","Contradicted"],["warn","Unsupported"]].forEach(function(x){var s=el("span",x[0]);s.appendChild(el("i"));s.appendChild(document.createTextNode(x[1]));leg.appendChild(s);});
+rep.appendChild(leg);
+if(D.report.name){rep.appendChild(el("div","pgno",D.report.name));}
+function claimSpan(i,text){
+  var c=D.claims[i],sp=el("span","claim",text);
+  sp.dataset.s=c.s;sp.dataset.i=i;sp.setAttribute("role","button");sp.tabIndex=0;
+  sp.setAttribute("aria-pressed","false");sp.title=c.id+" · "+c.status;
+  sp.onclick=function(){show(i);};
+  sp.onkeydown=function(k){if(k.key==="Enter"||k.key===" "){k.preventDefault();show(i);}};
+  return sp;
+}
+D.report.pages.forEach(function(pg){
+  if(D.report.multi){rep.appendChild(el("div","pgno","p."+pg.page));}
+  pg.paras.forEach(function(para){
+    var p=el("p");
+    para.forEach(function(s){if(s.c!=null){p.appendChild(claimSpan(s.c,s.t));}else{p.appendChild(document.createTextNode(s.t));}});
+    rep.appendChild(p);
+  });
+});
+if(!D.report.pages.length){rep.appendChild(el("p","empty","Report text unavailable."));}
+if(D.unplaced.length){
+  var u=el("div","unplaced");u.appendChild(h3("Claims not found verbatim in the text"));
+  D.unplaced.forEach(function(i){u.appendChild(claimSpan(i,D.claims[i].id+" · "+D.claims[i].text));});
+  rep.appendChild(u);
+}
+
+/* ---------- detail panel ---------- */
+function viewer(g,box){
+  var o=g.open;box.replaceChildren();
+  if(!o){return;}
+  if(o.kind==="image"){
+    var src=safeImg(D.images[o.key]);
+    if(src){var img=el("img");img.src=src;img.alt="Source page "+g.pageLabel+" of "+g.source;box.appendChild(img);}
+    box.appendChild(el("div","cap",g.source+" · "+g.pageLabel+" · highlighted where the quote was found"));
+  }else if(o.kind==="text"){
+    box.appendChild(segs(el("div","page"),o.segs));
+    box.appendChild(el("div","cap",g.source+" · "+g.pageLabel+" · full page text"));
+  }
+}
+function citation(d,g,box){
+  var head=h3("Citation guard · source "+g.source+" "+g.pageLabel+(g.locator?" · "+g.locator:""),"14px");
+  box.appendChild(head);
+  var gs=el("div","mono");
+  if(d.guard==="failed"){gs.className="mono g-bad";gs.textContent="✗ quote not re-found in the source: verdict downgraded";}
+  else{gs.className="mono g-ok";gs.textContent="✓ quote re-found word for word in the source";}
+  box.appendChild(gs);
+  box.appendChild(el("div","quote",g.quote));
+  var pg=el("div","page");
+  if(g.snippet){pg.appendChild(document.createTextNode(g.snippet.lead?"…\n":""));segs(pg,g.snippet.segs);pg.appendChild(document.createTextNode(g.snippet.tail?"\n…":""));}
+  else{pg.appendChild(document.createTextNode("…"));segs(pg,g.quoteSegs);pg.appendChild(document.createTextNode("…"));}
+  box.appendChild(pg);
+  var row=el("div","row"),vbox=el("div","viewer"),url=g.open&&g.open.kind==="url"?safeUrl(g.open.href):null;
+  if(url){var a=el("a","btn","Open source page ↗");a.href=url;a.target="_blank";a.rel="noopener noreferrer";row.appendChild(a);
+    row.appendChild(el("span","mono mute",url.replace(/^https?:\/\//i,"").slice(0,60)));}
+  else if(g.open){var b=el("button","btn","Open source page");b.type="button";b.setAttribute("aria-expanded","false");
+    b.onclick=function(){var on=b.getAttribute("aria-expanded")!=="true";b.setAttribute("aria-expanded",String(on));
+      b.textContent=on?"Hide source page":"Open source page";if(on){viewer(g,vbox);}else{vbox.replaceChildren();}};
+    row.appendChild(b);}
+  else{row.appendChild(el("span","mono mute","Source page not available in this session"));}
+  box.appendChild(row);box.appendChild(vbox);
+}
+function show(i){
+  i=Number(i);if(!(i>=0&&i<D.claims.length))return;cur=i;
+  var d=D.claims[i],box=document.getElementById("detail");
+  document.querySelectorAll(".claim").forEach(function(e){e.setAttribute("aria-pressed",String(Number(e.dataset.i)===i));});
+  box.replaceChildren();
+  box.appendChild(h3("Claim detail · "+d.id+(d.page?" · report p."+d.page:"")));
+  var head=el("div");head.appendChild(el("span","pill "+d.s,d.status));head.appendChild(document.createTextNode(" "));
+  head.appendChild(el("span","mono mute","via "+d.route));box.appendChild(head);
+  box.appendChild(el("p","ctext","“"+d.text+"”"));
+  if(d.flags.length){var fl=el("div");d.flags.forEach(function(f){var c=/greenwash|vague/.test(f)?"flag warn":/conflict|guard_failed/.test(f)?"flag bad":"flag";fl.appendChild(el("span",c,f));});box.appendChild(fl);}
+  if(d.explanation){box.appendChild(el("p","expl",d.explanation));}
+  var pct=Math.max(0,Math.min(100,Math.round(d.score*100)));
+  box.appendChild(h3("Evidence score · "+pct+"%","18px"));
+  var bar=el("div","bar"),fill=el("i");fill.style.width=pct+"%";bar.appendChild(fill);box.appendChild(bar);
+  box.appendChild(h3("Calculation (no LLM math)"));
+  box.appendChild(el("div","mono",d.calc||"—"));
+  if(d.rows.length){
+    var t=el("table"),tr=el("tr");["Indicator","Year","Value","Unit","Source"].forEach(function(x){tr.appendChild(el("th",null,x));});t.appendChild(tr);
+    d.rows.forEach(function(r){var row=el("tr");r.forEach(function(x){row.appendChild(el("td",null,x));});t.appendChild(row);});
+    box.appendChild(t);
+  }
+  if(d.groups.length){d.groups.forEach(function(g){citation(d,g,box);});}
+  else{box.appendChild(h3("Citation guard · source —","14px"));box.appendChild(el("div","quote","No supporting passage found."));}
+  var nav=el("div","row");
+  var rv=el("button","btn",reviewed[i]?"Reviewed ✓":"Mark reviewed");rv.type="button";rv.setAttribute("aria-pressed",String(!!reviewed[i]));
+  rv.onclick=function(){reviewed[i]=!reviewed[i];document.querySelectorAll('.claim[data-i="'+i+'"]').forEach(function(e){if(reviewed[i])e.dataset.r="1";else delete e.dataset.r;});show(i);};
+  nav.appendChild(rv);nav.appendChild(el("span","spacer"));
+  var pv=el("button","btn","← Prev"),nx=el("button","btn","Next →");pv.type=nx.type="button";
+  pv.disabled=i===0;nx.disabled=i===D.claims.length-1;
+  pv.onclick=function(){show(i-1);};nx.onclick=function(){show(i+1);};
+  nav.appendChild(pv);nav.appendChild(nx);box.appendChild(nav);
+}
+if(D.claims.length){show(0);}else{var dt=document.getElementById("detail");dt.appendChild(h3("Claim detail"));dt.appendChild(el("p","empty","No claims were found in this report."));}
+})();
+</script>
+</body>
+</html>
