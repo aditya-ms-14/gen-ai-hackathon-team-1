@@ -1,0 +1,24 @@
+# Lean set: Streamlit Community Cloud installs this file.
+# Retrieval runs BM25-only here; for vector search + reranking locally use requirements-local.txt.
+
+# UI
+streamlit>=1.40
+# Contracts + config
+pydantic>=2
+python-dotenv
+pycountry
+requests
+# Ingestion (evidence_layer)
+pandas
+openpyxl
+pymupdf
+pdfplumber
+# Retrieval (evidence_layer): keyword side
+rank-bm25
+numpy
+# LLM: built-in router (OpenAI-compatible) + team router (llm_router/: Gemini -> Groq -> LM Studio)
+openai
+httpx>=0.27
+jsonschema>=4.20
+# Tests
+pytest

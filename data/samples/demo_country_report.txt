@@ -1,0 +1,16 @@
+FICTIONAL DEMO · NATIONAL CLIMATE PROGRESS REPORT 2024
+Checked against official data: World Bank, Our World in Data, WRI, UNFCCC, UNEP, EEA.
+
+C01 Germany's CO2 emissions fell by 19% between 2010 and 2022.
+C02 India's greenhouse gas emissions rose by 25% between 2010 and 2022.
+C03 The United Kingdom's greenhouse gas emissions fell by 46% between 1990 and 2022.
+C04 The European Union's greenhouse gas emissions fell by 40% between 1990 and 2022.
+C05 Global greenhouse gas emissions rose by 47% between 2000 and 2023.
+C06 The United States' CO2 emissions fell by 30% between 2005 and 2022.
+C07 Germany's renewable energy consumption reached 18% in 2021.
+C08 Brazil's renewable electricity output reached 90% in 2021.
+C09 Brazil's forest area was 59.3% of its land area in 2022.
+C10 France's freshwater withdrawals fell by 10% between 2010 and 2023.
+C11 China's waste generation fell by 5% between 2016 and 2020.
+C12 Brazil's biodiversity improved by 15% between 2015 and 2022.
+C13 Our national energy system is green and fully sustainable.

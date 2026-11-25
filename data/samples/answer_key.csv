@@ -1,0 +1,7 @@
+claim_id,expected_status,expected_computed,expected_flags,why
+C01,Contradicted,-30.0,,claimed -40% but 1000 -> 700 tCO2e is -30%
+C02,Supported,-20.0,,50000 -> 40000 kL is -20%
+C03,Supported,75.0,,2025 renewable share is 75%
+C04,Unsupported,,,no 2025 waste figure
+C05,Unsupported,,,no biodiversity data at all
+C06,Unsupported,,greenwash,vague claim with no number or baseline
