@@ -1,6 +1,10 @@
 # Citation Auditor theme: warm paper (light) and ink (dark) palettes from the team's HTML design.
 # Streamlit follows the viewer's system setting; both palettes are switchable from the app menu.
 
+[browser]
+# Don't send Streamlit's anonymous usage statistics.
+gatherUsageStats = false
+
 [theme]
 font = "Fraunces:https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;1,9..144,400&display=swap"
 headingFont = "Fraunces:https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;1,9..144,400&display=swap"
