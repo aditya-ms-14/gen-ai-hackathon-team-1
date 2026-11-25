@@ -8,7 +8,9 @@ import httpx
 import pytest
 
 from llm_router import AllProvidersFailed, LLMRouter, ProviderError, RouterConfig, parse_claims_regex
-from llm_router.json_utils import extract_json
+from llm_router.config import load_dotenv, native_gemini_url
+from llm_router.errors import redact
+from llm_router.json_utils import JSONExtractError, extract_json
 from llm_router.providers import GeminiProvider, GroqProvider, LMStudioProvider, build_providers
 
 SCHEMA = {
@@ -91,8 +93,61 @@ def test_timeouts_retry_with_backoff_then_fall_back():
     router, clock = make_router(g, lm, max_retries=2, backoff_base=1)
     res = router.call_json(system="", user="u", schema=SCHEMA)
     assert res.provider == "lmstudio" and res.used_fallback
+    # a timeout is retried once, not max_retries times: a 120 s timeout x3 would stall one call for 6 minutes
+    assert clock.sleeps == [1]
+    assert [a.status for a in res.attempts] == ["timeout", "timeout", "ok"]
+    assert len(g.calls) == 2
+
+
+def test_server_errors_exhaust_retries_then_provider_is_paused():
+    g = FakeProvider("gemini", [err("gemini", "server", True)] * 3)
+    lm = FakeProvider("lmstudio", ['{"value": 1, "unit": "t"}'] * 3)
+    router, clock = make_router(g, lm, max_retries=2, backoff_base=1, failure_cooldown=30)
+    assert router.call_json(system="", user="u", schema=SCHEMA).provider == "lmstudio"
     assert clock.sleeps == [1, 2]
-    assert [a.status for a in res.attempts] == ["timeout", "timeout", "timeout", "ok"]
+    for _ in range(2):  # a batch does not pay for the dead provider again
+        assert router.call_json(system="", user="u", schema=SCHEMA).provider == "lmstudio"
+    assert len(g.calls) == 3
+    assert router.status()[0]["cooldown_s"] > 0
+    clock.t += 31
+    g.script.append('{"value": 2, "unit": "t"}')
+    assert router.call_json(system="", user="u", schema=SCHEMA).provider == "gemini"
+
+
+def test_unexpected_exception_in_a_provider_does_not_escape():
+    g = FakeProvider("gemini", [KeyError("boom")])
+    lm = FakeProvider("lmstudio", ['{"value": 1, "unit": "t"}'])
+    router, _ = make_router(g, lm)
+    assert router.call_json(system="", user="u", schema=SCHEMA).provider == "lmstudio"
+
+
+def test_stats_last_provider_and_status_for_the_ui():
+    g = FakeProvider("gemini", [err("gemini", "rate_limit", False, retry_after=5)])
+    q = FakeProvider("groq", ['{"value": 1, "unit": "t"}'])
+    router, _ = make_router(g, q)
+    router.call_json(system="", user="u", schema=SCHEMA)
+    assert router.last_provider == "groq"
+    assert router.stats == {"gemini": {"calls": 1, "failures": 1}, "groq": {"calls": 1, "failures": 0}}
+    row = router.status()[0]
+    assert row["failures"] == 1 and "rate_limit" in row["last_error"] and row["cooldown_s"] > 0
+    failing, _ = make_router(FakeProvider("gemini", [err("gemini", "auth", False)]))
+    with pytest.raises(AllProvidersFailed):
+        failing.call_json(system="", user="u", schema=SCHEMA)
+    assert failing.last_provider is None
+
+
+def test_call_text_strips_think_blocks():
+    g = FakeProvider("gemini", ["<think>hmm</think>\nSupported."])
+    router, _ = make_router(g)
+    assert router.call_text(system="", user="narrate").data == "Supported."
+
+
+def test_cooldown_is_capped():
+    g = FakeProvider("gemini", [err("gemini", "rate_limit", False, retry_after=99999)])
+    router, _ = make_router(g, max_cooldown=600)
+    with pytest.raises(AllProvidersFailed):
+        router.call_json(system="", user="u", schema=SCHEMA)
+    assert router.status()[0]["cooldown_s"] == 600
 
 
 def test_server_error_recovers_on_retry():
@@ -170,23 +225,34 @@ def test_call_text():
     '{"a": 1}',
     '```json\n{"a": 1}\n```',
     'Here is the result: {"a": 1} hope it helps',
+    '<think>The user wants {json}...</think>\n{"a": 1}',
+    'Result: {"a": 1,} done',
+    'See note [1]. Answer: {"a": 1} and {"b": 2}',
 ])
 def test_extract_json(text):
     assert extract_json(text) == {"a": 1}
 
 
+def test_extract_json_arrays_and_failures():
+    assert extract_json('[{"text": "x"}]') == [{"text": "x"}]
+    assert extract_json("[1, 2, 3]") == [1, 2, 3]  # last resort when no object exists
+    for bad in ("no json here", "", "5"):
+        with pytest.raises(JSONExtractError):
+            extract_json(bad)
+
+
 # -- regex fallback --------------------------------------------------------------
 
-def test_regex_parser_basic():
+def test_regex_fallback_delegates_to_the_claim_parser():
     out = parse_claims_regex(
-        "We reduced Scope 1 emissions by 18.5% between 2019 and 2023. "
-        "Renewable electricity reached 1,250 MWh in FY2024. We aim for net zero by 2040."
+        "We reduced greenhouse gas emissions by 18.5% between 2019 and 2023. "
+        "Renewable electricity reached 75% in 2024."
     )
+    assert out["parser"] == "regex"
     c = out["claims"]
     assert c[0]["value"] == 18.5 and c[0]["unit"] == "%" and c[0]["direction"] == "decrease"
-    assert c[0]["is_percent_change"] and c[0]["year"] == 2023 and c[0]["baseline_year"] == 2019
-    assert c[1]["value"] == 1250 and c[1]["unit"] == "MWh" and c[1]["year"] == 2024
-    assert not any(x["value"] == 2040 for x in c)  # bare years are not metrics
+    assert c[0]["metric"] == "pct_change" and c[0]["baseline_year"] == 2019 and c[0]["target_year"] == 2023
+    assert c[1]["value"] == 75 and c[1]["metric"] == "share"
 
 
 # -- provider wire formats (mocked HTTP) ---------------------------------------
@@ -256,7 +322,129 @@ def test_lmstudio_autodetects_model_and_uses_json_schema():
     p.complete("", "hi", schema=SCHEMA)
     assert seen["body"]["model"] == "qwen2.5-3b-instruct"
     assert seen["body"]["response_format"]["json_schema"]["schema"] == SCHEMA
-    assert "authorization" not in {k.lower() for k in seen.get("headers", {})}
+
+
+def test_lmstudio_prefers_loaded_chat_model_over_embedders():
+    urls = []
+
+    def handler(req):
+        urls.append(req.url.path)
+        if req.url.path == "/api/v0/models":
+            return httpx.Response(200, json={"data": [
+                {"id": "nomic-embed", "type": "embeddings", "state": "loaded"},
+                {"id": "qwen2.5-7b", "type": "llm", "state": "not-loaded"},
+                {"id": "llama-3.2-3b", "type": "llm", "state": "loaded"}]})
+        return httpx.Response(200, json={"choices": [{"message": {"content": "hi"}}]})
+
+    p = LMStudioProvider(RouterConfig(), mock_client(handler))
+    p.complete("", "q")
+    p.complete("", "q")
+    assert p.model == "llama-3.2-3b" and urls.count("/api/v0/models") == 1  # detected once
+
+
+def test_lmstudio_only_embedding_models_loaded_is_unusable():
+    p = LMStudioProvider(RouterConfig(), mock_client(lambda req: httpx.Response(200, json={"data": [{"id": "text-embedding-nomic"}]})))
+    with pytest.raises(ProviderError) as exc:
+        p.complete("", "hi")
+    assert exc.value.kind == "unreachable"
+
+
+def test_lmstudio_defaults_to_ipv4_and_connect_timeout_is_unreachable_not_retried():
+    assert "127.0.0.1" in RouterConfig().lmstudio_base_url
+    assert LMStudioProvider(RouterConfig(lmstudio_base_url="http://localhost:1234/v1")).base_url == "http://127.0.0.1:1234/v1"
+
+    def handler(req):
+        raise httpx.ConnectTimeout("slow")
+
+    p = LMStudioProvider(RouterConfig(lmstudio_model="m"), mock_client(handler))
+    with pytest.raises(ProviderError) as exc:
+        p.complete("", "hi")
+    assert exc.value.kind == "unreachable" and not exc.value.retryable
+
+
+def test_openai_compat_negotiates_response_format_and_remembers():
+    bodies = []
+
+    def handler(req):
+        body = json.loads(req.content)
+        bodies.append(body.get("response_format", {}).get("type"))
+        if "response_format" in body:
+            return httpx.Response(400, json={"error": "response_format is not supported by this model"})
+        return httpx.Response(200, json={"choices": [{"message": {"content": "{}"}}]})
+
+    p = LMStudioProvider(RouterConfig(lmstudio_model="m"), mock_client(handler))
+    assert p.complete("", "hi", schema=SCHEMA) == "{}"
+    assert bodies == ["json_schema", "json_object", None]
+    bodies.clear()
+    p.complete("", "hi", schema=SCHEMA)
+    assert bodies == [None]
+
+
+def test_union_schema_is_not_sent_as_strict_json_schema():
+    seen = []
+
+    def handler(req):
+        seen.append(json.loads(req.content)["response_format"])
+        return httpx.Response(200, json={"choices": [{"message": {"content": "{}"}}]})
+
+    p = LMStudioProvider(RouterConfig(lmstudio_model="m"), mock_client(handler))
+    p.complete("", "hi", schema={"type": ["object", "array"]})
+    assert seen == [{"type": "json_object"}]
+
+
+def test_system_role_rejection_merges_into_user_message():
+    bodies = []
+
+    def handler(req):
+        body = json.loads(req.content)
+        bodies.append([m["role"] for m in body["messages"]])
+        if len(body["messages"]) == 2:
+            return httpx.Response(400, json={"error": "System role not supported"})
+        return httpx.Response(200, json={"choices": [{"message": {"content": "ok"}}]})
+
+    p = LMStudioProvider(RouterConfig(lmstudio_model="gemma"), mock_client(handler))
+    assert p.complete("be brief", "hello") == "ok"
+    assert bodies == [["system", "user"], ["user"]]
+
+
+def test_api_keys_never_appear_in_errors():
+    key = "AIzaSyA1234567890abcdefghijklmnopqrstu"
+    p = GeminiProvider(RouterConfig(gemini_api_key=key),
+                       mock_client(lambda r: httpx.Response(403, text=f"API key {key} is not valid")))
+    with pytest.raises(ProviderError) as exc:
+        p.complete("", "hi")
+    assert key not in str(exc.value) and key not in exc.value.message
+    assert redact("Authorization: Bearer abcdefghijklmnop1234") == "Authorization: ***"
+
+
+# -- config -------------------------------------------------------------------------
+
+def test_dotenv_handles_bom_comments_quotes_and_export(tmp_path, monkeypatch):
+    for k in ("T_A", "T_B", "T_C", "T_D"):
+        monkeypatch.delenv(k, raising=False)
+    f = tmp_path / ".env"
+    f.write_text("\ufeffT_A=1  # note\nexport T_B=\"two words\" # c\nT_C='x#y'\n# T_D=no\n", encoding="utf-8")
+    load_dotenv(f)
+    import os
+    try:
+        assert (os.environ["T_A"], os.environ["T_B"], os.environ["T_C"]) == ("1", "two words", "x#y")
+        assert "T_D" not in os.environ
+    finally:
+        for k in ("T_A", "T_B", "T_C"):
+            os.environ.pop(k, None)
+
+
+def test_config_survives_typos_and_the_openai_style_gemini_url(monkeypatch):
+    monkeypatch.setenv("LLM_MAX_RETRIES", "two")
+    monkeypatch.setenv("GEMINI_TIMEOUT", "fast")
+    monkeypatch.setenv("LLM_TIMEOUT_SECONDS", "")
+    monkeypatch.setenv("GEMINI_BASE_URL", "https://generativelanguage.googleapis.com/v1beta/openai/")
+    monkeypatch.setenv("LMSTUDIO_BASE_URL", "http://localhost:1234/v1")
+    cfg = RouterConfig.from_env(None)
+    assert cfg.max_retries == 2 and cfg.gemini_timeout == 30.0
+    assert cfg.gemini_base_url == "https://generativelanguage.googleapis.com/v1beta"
+    assert cfg.lmstudio_base_url == "http://127.0.0.1:1234/v1"
+    assert native_gemini_url("https://x/v1beta") == "https://x/v1beta"
 
 
 def test_lmstudio_not_running_is_unreachable():

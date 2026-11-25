@@ -2,6 +2,15 @@
 
 from __future__ import annotations
 
+import re
+
+# API keys must never reach logs, exceptions or the UI, even if a provider echoes one back.
+_SECRETS = re.compile(r"AIza[0-9A-Za-z_\-]{20,}|gsk_[0-9A-Za-z]{20,}|sk-[0-9A-Za-z_\-]{20,}|(?i:bearer)\s+[0-9A-Za-z._\-]{12,}")
+
+
+def redact(text: str) -> str:
+    return _SECRETS.sub("***", text)
+
 
 class ProviderError(Exception):
     """A single provider call failed.
@@ -27,6 +36,7 @@ class ProviderError(Exception):
         status: int | None = None,
         retry_after: float | None = None,
     ) -> None:
+        message = redact(message)
         super().__init__(f"[{provider}] {kind}: {message}")
         self.provider = provider
         self.message = message

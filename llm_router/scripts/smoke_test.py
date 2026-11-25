@@ -1,9 +1,10 @@
 """Live check of the LLM router on a real machine.
 
-    python scripts/smoke_test_router.py            # test each provider, then the full chain
-    python scripts/smoke_test_router.py --only lmstudio
+    python llm_router/scripts/smoke_test.py            # test each provider, then the full chain
+    python llm_router/scripts/smoke_test.py --only lmstudio
 
-Reads keys from .env (see .env.example). Providers without a key are skipped.
+Reads keys from .env (see .env.example). Providers without a key are skipped; LM Studio is
+skipped when its server is not running.
 """
 
 from __future__ import annotations
@@ -14,7 +15,7 @@ import logging
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))  # repo root
 
 from llm_router import AllProvidersFailed, LLMRouter, RouterConfig, parse_claims_regex  # noqa: E402
 from llm_router.providers import build_providers  # noqa: E402
@@ -68,8 +69,11 @@ def main() -> int:
             res = router.call_json(system=SYSTEM, user=TEXT, schema=CLAIM_SCHEMA, task="smoke")
             print(f"  {name:9} OK   {res.model}  {res.latency_ms} ms  -> {json.dumps(res.data)[:120]}")
         except AllProvidersFailed as exc:
-            ok = False
             a = exc.attempts[-1]
+            if a.status == "unreachable":  # e.g. LM Studio server not started: not a failure of the router
+                print(f"  {name:9} SKIPPED ({a.message[:100]})")
+                continue
+            ok = False
             print(f"  {name:9} FAIL {a.status}: {a.message[:150]}")
 
     if not args.only:

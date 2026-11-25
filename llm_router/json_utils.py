@@ -9,38 +9,55 @@ from typing import Any
 from jsonschema import Draft202012Validator
 
 _FENCE = re.compile(r"```(?:json)?\s*(.*?)```", re.DOTALL | re.IGNORECASE)
+_THINK = re.compile(r"<think>.*?</think>", re.DOTALL | re.IGNORECASE)
+_TRAILING_COMMA = re.compile(r",\s*([}\]])")
 
 
 class JSONExtractError(ValueError):
     pass
 
 
+def strip_reasoning(text: str) -> str:
+    """Drop <think>...</think> blocks that reasoning models (Qwen3, R1) put before the answer."""
+    text = _THINK.sub("", text)
+    if "</think>" in text:  # some chat templates swallow the opening tag
+        text = text.split("</think>", 1)[1]
+    return text.strip()
+
+
+def _is_wanted(value: Any) -> bool:
+    """An object, or a list of objects. Skips scalars and stray '[1]' footnote markers in chatter."""
+    return isinstance(value, dict) or (isinstance(value, list) and all(isinstance(v, dict) for v in value))
+
+
 def extract_json(text: str) -> Any:
-    """Return the first JSON object/array found in ``text``.
+    """Return the first JSON object (or array of objects) found in ``text``.
 
-    Handles plain JSON, ```json fenced blocks and JSON surrounded by chatter
-    (common with small local models).
+    Handles plain JSON, ```json fenced blocks, JSON surrounded by chatter, <think> blocks
+    and trailing commas (all common with small local models). If nothing else is found,
+    falls back to the first array of any kind. Raises JSONExtractError.
     """
-    text = text.strip()
-    try:
-        return json.loads(text)
-    except ValueError:
-        pass
-
-    for block in _FENCE.findall(text):
-        try:
-            return json.loads(block.strip())
-        except ValueError:
-            continue
-
+    text = strip_reasoning(text or "")
     decoder = json.JSONDecoder()
-    for i, ch in enumerate(text):
-        if ch in "{[":
-            try:
-                obj, _ = decoder.raw_decode(text, i)
-                return obj
-            except ValueError:
+    fallback: Any = None
+    found_fallback = False
+    for candidate in [text] + [m.group(1) for m in _FENCE.finditer(text)]:
+        for i, ch in enumerate(candidate):
+            if ch not in "{[":
                 continue
+            tail = candidate[i:]
+            for attempt in (tail, _TRAILING_COMMA.sub(r"\1", tail)):
+                try:
+                    value, _ = decoder.raw_decode(attempt)
+                except ValueError:
+                    continue
+                if _is_wanted(value):
+                    return value
+                if not found_fallback and isinstance(value, list):
+                    fallback, found_fallback = value, True
+                break
+    if found_fallback:
+        return fallback
     raise JSONExtractError("no valid JSON found in model output")
 
 

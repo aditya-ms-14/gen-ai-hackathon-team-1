@@ -16,9 +16,13 @@ Usage
     res.provider    # "gemini" | "groq" | "lmstudio" | "regex"
 
 Per provider:
-  * timeout / 5xx / network      -> retry with exponential backoff
+  * timeout (once) / 5xx / network -> retry with exponential backoff; after the last retry the
+                                      provider is skipped for a short cool-down
   * invalid or off-schema JSON   -> retry with a "fix your JSON" note
   * 429 / auth error / unreachable -> move on now, skip this provider for a cool-down
+
+For the UI: ``last_provider``, ``stats`` ({"gemini": {"calls": n, "failures": n}, ...}),
+``last_error`` and ``status()``. Nothing here ever blocks longer than the configured timeouts.
 """
 
 from __future__ import annotations
@@ -33,13 +37,13 @@ import httpx
 
 from .config import RouterConfig
 from .errors import AllProvidersFailed, ProviderError
-from .json_utils import JSONExtractError, extract_json, schema_errors
+from .json_utils import JSONExtractError, extract_json, schema_errors, strip_reasoning
 from .providers import BaseProvider, build_providers
 
 log = logging.getLogger("llm_router")
 
 JSON_INSTRUCTION = (
-    "Respond with a single JSON object only: no markdown, no code fences, no commentary. "
+    "Respond with a single JSON value only: no markdown, no code fences, no commentary. "
     "It must validate against this JSON Schema:\n{schema}"
 )
 
@@ -67,7 +71,7 @@ class RouterResult:
     def used_fallback(self) -> bool:
         """True when the answer did not come from the first provider tried."""
         tried = [a for a in self.attempts if a.status != "skipped"]
-        return bool(tried) and tried[0].provider != self.provider or self.provider == "regex"
+        return (bool(tried) and tried[0].provider != self.provider) or self.provider == "regex"
 
     @property
     def is_llm(self) -> bool:
@@ -90,6 +94,10 @@ class LLMRouter:
         self._sleep = sleep
         self._clock = clock
         self._cooldown_until: dict[str, float] = {}
+        # For the UI (see module docstring).
+        self.last_provider: str | None = None
+        self.stats: dict[str, dict[str, int]] = {p.name: {"calls": 0, "failures": 0} for p in providers}
+        self.last_error: dict[str, str] = {}
 
     @classmethod
     def from_env(cls, dotenv_path: str | None = ".env", client: httpx.Client | None = None) -> "LLMRouter":
@@ -136,6 +144,8 @@ class LLMRouter:
                 "model": p.model or "(auto)",
                 "configured": p.available(),
                 "cooldown_s": max(0, round(self._cooldown_until.get(p.name, 0) - now)),
+                **self.stats[p.name],
+                "last_error": self.last_error.get(p.name, ""),
             }
             for p in self.providers
         ]
@@ -157,32 +167,44 @@ class LLMRouter:
                 continue
 
             prompt = user
+            timeouts = 0
             for try_no in range(self.cfg.max_retries + 1):
                 t0 = self._clock()
+                self.stats[provider.name]["calls"] += 1
                 try:
                     raw = provider.complete(system, prompt, schema=schema, temperature=temperature, max_tokens=max_tokens)
                     data = self._parse(provider.name, raw, schema)
                 except ProviderError as exc:
-                    attempts.append(Attempt(provider.name, provider.model, exc.kind, exc.message, self._ms(t0)))
-                    log.warning("[%s] %s attempt %d failed: %s", task, provider.name, try_no + 1, exc)
-                    if exc.kind in ("rate_limit", "unreachable", "auth"):
-                        # Won't fix itself within this call: skip the provider for a while
-                        # so a "Verify All" batch doesn't pay the failure cost on every claim.
-                        self._cooldown_until[provider.name] = self._clock() + max(
-                            self.cfg.rate_limit_cooldown, exc.retry_after or 0
-                        )
-                        break
-                    if not exc.retryable or try_no == self.cfg.max_retries:
-                        break
-                    if exc.kind == "bad_output" and schema is not None:
-                        prompt = self._repair_prompt(user, exc.message)  # retry at once, no backoff
-                    else:
-                        self._sleep(min(self.cfg.backoff_max, self.cfg.backoff_base * 2**try_no))
-                    continue
+                    failure = exc
+                except Exception as exc:  # noqa: BLE001 - a provider bug must not crash the caller
+                    failure = ProviderError(
+                        provider.name, f"unexpected {type(exc).__name__}: {exc}", kind="bad_output", retryable=False
+                    )
+                else:
+                    attempts.append(Attempt(provider.name, provider.model, "ok", "", self._ms(t0)))
+                    log.info("[%s] answered by %s (%s)", task, provider.name, provider.model)
+                    self.last_provider = provider.name
+                    return RouterResult(data, raw, provider.name, provider.model, task, attempts, self._ms(start))
 
-                attempts.append(Attempt(provider.name, provider.model, "ok", "", self._ms(t0)))
-                log.info("[%s] answered by %s (%s)", task, provider.name, provider.model)
-                return RouterResult(data, raw, provider.name, provider.model, task, attempts, self._ms(start))
+                exc = failure
+                attempts.append(Attempt(provider.name, provider.model, exc.kind, exc.message, self._ms(t0)))
+                self.stats[provider.name]["failures"] += 1
+                self.last_error[provider.name] = f"{exc.kind}: {exc.message}"[:200]
+                log.warning("[%s] %s attempt %d failed: %s", task, provider.name, try_no + 1, exc)
+                if exc.kind in ("rate_limit", "unreachable", "auth") or exc.status == 404:
+                    # Won't fix itself within this call: skip the provider for a while
+                    # so a "Verify All" batch doesn't pay the failure cost on every claim.
+                    self._pause(provider.name, max(self.cfg.rate_limit_cooldown, exc.retry_after or 0))
+                    break
+                timeouts += exc.kind == "timeout"
+                if not exc.retryable or try_no == self.cfg.max_retries or timeouts > self.cfg.timeout_retries:
+                    if exc.kind in ("timeout", "network", "server"):
+                        self._pause(provider.name, self.cfg.failure_cooldown)  # out of retries: it is down
+                    break
+                if exc.kind == "bad_output" and schema is not None:
+                    prompt = self._repair_prompt(user, exc.message)  # retry at once, no backoff
+                else:
+                    self._sleep(min(self.cfg.backoff_max, self.cfg.backoff_base * 2**try_no))
 
         if fallback is not None:
             t0 = self._clock()
@@ -198,14 +220,22 @@ class LLMRouter:
                 attempts.append(Attempt("regex", "", "ok", "", self._ms(t0)))
                 log.warning("[%s] all LLMs failed, used regex fallback", task)
                 raw = data if isinstance(data, str) else json.dumps(data)
+                self.last_provider = "regex"
                 return RouterResult(data, raw, "regex", "", task, attempts, self._ms(start))
 
+        self.last_provider = None
         raise AllProvidersFailed(attempts)
+
+    def _pause(self, name: str, seconds: float) -> None:
+        self._cooldown_until[name] = self._clock() + min(seconds, self.cfg.max_cooldown)
 
     @staticmethod
     def _parse(provider: str, raw: str, schema: dict | None) -> Any:
         if schema is None:
-            return raw.strip()
+            text = strip_reasoning(raw)  # <think> blocks must not leak into narration
+            if not text:
+                raise ProviderError(provider, "empty output", kind="bad_output", retryable=True)
+            return text
         try:
             data = extract_json(raw)
         except JSONExtractError as exc:

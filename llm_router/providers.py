@@ -14,7 +14,7 @@ from typing import Any
 
 import httpx
 
-from .config import RouterConfig
+from .config import RouterConfig, ipv4_localhost
 from .errors import ProviderError
 
 log = logging.getLogger("llm_router")
@@ -36,12 +36,20 @@ def _retry_after(resp: httpx.Response) -> float | None:
         return None
 
 
+def _enforceable(schema: dict | None) -> bool:
+    """Providers can enforce a schema whose root is one concrete type. A union such as
+    {"type": ["object", "array"]} (used for "any JSON") is only checked by the router afterwards."""
+    return isinstance(schema, dict) and schema.get("type") in ("object", "array")
+
+
 class BaseProvider:
     name = "base"
 
-    def __init__(self, model: str, timeout: float, client: httpx.Client | None = None) -> None:
+    def __init__(self, model: str, timeout: float, client: httpx.Client | None = None,
+                 connect_timeout: float = 10.0) -> None:
         self.model = model
         self.timeout = timeout
+        self.connect_timeout = min(connect_timeout, timeout)
         self._client = client or httpx.Client()
 
     def available(self) -> bool:
@@ -60,11 +68,19 @@ class BaseProvider:
         raise NotImplementedError
 
     # -- shared HTTP handling -------------------------------------------------
-    def _request(self, method: str, url: str, headers: dict, payload: dict | None = None) -> Any:
+    def _request(self, method: str, url: str, headers: dict, payload: dict | None = None,
+                 timeout: float | None = None) -> Any:
+        total = timeout or self.timeout
         try:
-            resp = self._client.request(method, url, headers=headers, json=payload, timeout=self.timeout)
+            resp = self._client.request(
+                method, url, headers=headers, json=payload,
+                timeout=httpx.Timeout(total, connect=min(self.connect_timeout, total)),
+            )
+        except httpx.ConnectTimeout:
+            # Nothing accepted the connection: retrying would only repeat the wait.
+            raise ProviderError(self.name, f"cannot connect to {url} (timed out)", kind="unreachable", retryable=False)
         except httpx.TimeoutException:
-            raise ProviderError(self.name, f"no response within {self.timeout:.0f}s", kind="timeout", retryable=True)
+            raise ProviderError(self.name, f"no response within {total:.0f}s", kind="timeout", retryable=True)
         except httpx.ConnectError as exc:
             raise ProviderError(self.name, f"cannot connect to {url} ({exc})", kind="unreachable", retryable=False)
         except httpx.HTTPError as exc:
@@ -99,7 +115,7 @@ class GeminiProvider(BaseProvider):
     name = "gemini"
 
     def __init__(self, cfg: RouterConfig, client: httpx.Client | None = None) -> None:
-        super().__init__(cfg.gemini_model, cfg.gemini_timeout, client)
+        super().__init__(cfg.gemini_model, cfg.gemini_timeout, client, cfg.connect_timeout)
         self.api_key = cfg.gemini_api_key
         self.base_url = cfg.gemini_base_url.rstrip("/")
         self.thinking_budget = cfg.gemini_thinking_budget
@@ -113,7 +129,7 @@ class GeminiProvider(BaseProvider):
         gen: dict[str, Any] = {"temperature": temperature, "maxOutputTokens": max_tokens}
         if schema is not None:
             gen["responseMimeType"] = "application/json"
-            if self.use_native_schema:
+            if self.use_native_schema and _enforceable(schema):
                 gen["responseJsonSchema"] = schema
         if self.thinking_budget is not None:
             gen["thinkingConfig"] = {"thinkingBudget": self.thinking_budget}
@@ -159,10 +175,14 @@ class OpenAICompatProvider(BaseProvider):
     # "json_schema": provider enforces the schema itself (LM Studio supports this).
     json_mode = "json_object"
 
-    def __init__(self, model: str, timeout: float, base_url: str, api_key: str = "", client: httpx.Client | None = None):
-        super().__init__(model, timeout, client)
+    def __init__(self, model: str, timeout: float, base_url: str, api_key: str = "",
+                 client: httpx.Client | None = None, connect_timeout: float = 10.0):
+        super().__init__(model, timeout, client, connect_timeout)
         self.base_url = base_url.rstrip("/")
         self.api_key = api_key
+        # response_format modes this server refused (HTTP 400/422): remembered, never sent again.
+        self._rejected_modes: set[str] = set()
+        self._merge_system = False  # server rejected the system role (some chat templates, e.g. Gemma)
 
     def _headers(self) -> dict:
         h = {"Content-Type": "application/json"}
@@ -173,27 +193,50 @@ class OpenAICompatProvider(BaseProvider):
     def _model_id(self) -> str:
         return self.model
 
+    def _modes(self, schema: dict | None) -> list[str | None]:
+        """response_format modes to try, best first; None = plain prompting (schema is in the prompt)."""
+        if schema is None:
+            return [None]
+        order: list[str | None] = []
+        if self.json_mode == "json_schema" and _enforceable(schema):
+            order.append("json_schema")
+        order += ["json_object", None]
+        return [m for m in order if m is None or m not in self._rejected_modes]
+
     def complete(self, system, user, *, schema=None, temperature=0.0, max_tokens=4096) -> str:
-        messages = []
-        if system:
-            messages.append({"role": "system", "content": system})
-        messages.append({"role": "user", "content": user})
-        payload: dict[str, Any] = {
-            "model": self._model_id(),
-            "messages": messages,
-            "temperature": temperature,
-            "max_tokens": max_tokens,
-        }
-        if schema is not None:
-            if self.json_mode == "json_schema":
+        model = self._model_id()
+        modes = self._modes(schema)
+        for n, mode in enumerate(modes):
+            if system and not self._merge_system:
+                messages = [{"role": "system", "content": system}, {"role": "user", "content": user}]
+            else:
+                messages = [{"role": "user", "content": f"{system}\n\n{user}" if system else user}]
+            payload: dict[str, Any] = {
+                "model": model, "messages": messages, "temperature": temperature, "max_tokens": max_tokens,
+            }
+            if mode == "json_schema":
                 payload["response_format"] = {
                     "type": "json_schema",
                     "json_schema": {"name": "response", "strict": True, "schema": schema},
                 }
-            else:
+            elif mode == "json_object":
                 payload["response_format"] = {"type": "json_object"}
-
-        data = self._request("POST", f"{self.base_url}/chat/completions", self._headers(), payload)
+            try:
+                data = self._request("POST", f"{self.base_url}/chat/completions", self._headers(), payload)
+            except ProviderError as exc:
+                if exc.kind != "bad_request":
+                    raise
+                low = exc.message.lower()
+                if system and not self._merge_system and "system" in low and ("role" in low or "not supported" in low):
+                    log.info("%s rejected the system role, merging it into the user message", self.name)
+                    self._merge_system = True
+                    return self.complete(system, user, schema=schema, temperature=temperature, max_tokens=max_tokens)
+                if mode is not None and n < len(modes) - 1:
+                    log.info("%s rejected response_format=%s: %s", self.name, mode, exc.message)
+                    self._rejected_modes.add(mode)
+                    continue
+                raise
+            break
         try:
             text = data["choices"][0]["message"]["content"] or ""
         except (KeyError, IndexError, TypeError):
@@ -208,7 +251,8 @@ class GroqProvider(OpenAICompatProvider):
     json_mode = "json_object"
 
     def __init__(self, cfg: RouterConfig, client: httpx.Client | None = None) -> None:
-        super().__init__(cfg.groq_model, cfg.groq_timeout, cfg.groq_base_url, cfg.groq_api_key, client)
+        super().__init__(cfg.groq_model, cfg.groq_timeout, cfg.groq_base_url, cfg.groq_api_key, client,
+                         cfg.connect_timeout)
 
     def available(self) -> bool:
         return bool(self.api_key)
@@ -219,21 +263,50 @@ class LMStudioProvider(OpenAICompatProvider):
 
     name = "lmstudio"
     json_mode = "json_schema"
+    PROBE_TIMEOUT = 3.0  # listing models is instant on a running server
 
     def __init__(self, cfg: RouterConfig, client: httpx.Client | None = None) -> None:
-        super().__init__(cfg.lmstudio_model, cfg.lmstudio_timeout, cfg.lmstudio_base_url, "", client)
+        # trust_env=False: never send local traffic through HTTP(S)_PROXY from the environment.
+        super().__init__(cfg.lmstudio_model, cfg.lmstudio_timeout, ipv4_localhost(cfg.lmstudio_base_url), "",
+                         client or httpx.Client(trust_env=False), cfg.lmstudio_connect_timeout)
+        self._auto_model = not cfg.lmstudio_model
+
+    def complete(self, system, user, *, schema=None, temperature=0.0, max_tokens=4096) -> str:
+        try:
+            return super().complete(system, user, schema=schema, temperature=temperature, max_tokens=max_tokens)
+        except ProviderError as exc:
+            if self._auto_model and exc.kind in ("bad_request", "unreachable"):
+                self.model = ""  # the loaded model may have changed: detect again next time
+            raise
 
     def _model_id(self) -> str:
         if not self.model:
-            # No model configured: use whatever is loaded in LM Studio.
-            data = self._request("GET", f"{self.base_url}/models", self._headers())
-            models = [m.get("id") for m in data.get("data", []) if m.get("id")]
-            chat_models = [m for m in models if "embed" not in m.lower()]
-            if not chat_models:
-                raise ProviderError(self.name, "no model loaded in LM Studio", kind="unreachable", retryable=False)
-            self.model = chat_models[0]
+            self.model = self._detect_model()
             log.info("lmstudio: using loaded model %s", self.model)
         return self.model
+
+    def _detect_model(self) -> str:
+        """The chat model LM Studio has loaded: prefers its REST API (knows type and loaded state),
+        falls back to /v1/models minus embedding models. Raises ProviderError if there is none."""
+        root = self.base_url[:-3] if self.base_url.endswith("/v1") else self.base_url
+        try:
+            data = self._request("GET", f"{root}/api/v0/models", self._headers(), timeout=self.PROBE_TIMEOUT)
+            chat = [m for m in data.get("data", []) if m.get("type") in ("llm", "vlm") and m.get("id")]
+            loaded = [m for m in chat if m.get("state") == "loaded"]
+            if loaded or chat:
+                return (loaded or chat)[0]["id"]
+        except ProviderError as exc:
+            if exc.kind in ("unreachable", "timeout", "network"):
+                raise ProviderError(self.name, exc.message, kind="unreachable", retryable=False)
+            # older LM Studio / another OpenAI-compatible server: use /v1/models
+        except (AttributeError, TypeError):
+            pass  # unexpected JSON shape
+        data = self._request("GET", f"{self.base_url}/models", self._headers(), timeout=self.PROBE_TIMEOUT)
+        ids = [m.get("id") for m in data.get("data", []) if m.get("id")]
+        chat_ids = [i for i in ids if "embed" not in str(i).lower()]
+        if not chat_ids:
+            raise ProviderError(self.name, "no chat model loaded in LM Studio", kind="unreachable", retryable=False)
+        return chat_ids[0]
 
 
 PROVIDERS = {
