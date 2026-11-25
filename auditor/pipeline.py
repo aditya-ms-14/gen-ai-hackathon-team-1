@@ -14,7 +14,7 @@ from trust_layer.explain import narrate
 from trust_layer.guard import apply_guard
 from evidence_layer.ingest import ingest_file, read_pages
 from evidence_layer.ledger import Ledger
-from llm_router.builtin import make_router
+from llm_router import make_router
 from evidence_layer.resolver import fill_years, resolve
 from evidence_layer.retrieval import HybridIndex
 from auditor.schemas import Status, Verdict
