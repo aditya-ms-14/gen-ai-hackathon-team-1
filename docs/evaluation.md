@@ -10,7 +10,7 @@ Datasets: **PS sample** (`sample_report_2025.txt` + `evidence_2024_2025.csv`, 6 
 
 Matching: claims are paired with the answer key by sentence (company) or claim id (others). A claim the parser did not extract counts as wrong. "Cited" = every evidence fact of a Supported/Contradicted verdict has source, locator and quote. Mean confidence is over checked verdicts only.
 
-## Results (deterministic)
+## Results 
 
 ### Summary
 
