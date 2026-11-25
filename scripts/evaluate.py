@@ -1,11 +1,12 @@
-r"""Evaluate the Citation Auditor against the three answer-keyed datasets.
+r"""Evaluate the Citation Auditor against the five answer-keyed datasets.
 
     set PYTHONPATH=<repo root>
     .venv\Scripts\python.exe scripts/evaluate.py            # deterministic (use_llm=False), writes docs/evaluation.md
     .venv\Scripts\python.exe scripts/evaluate.py --llm      # also runs with use_llm=True and reports the provider
 
 Datasets: PS sample (sample_report_2025.txt + evidence_2024_2025.csv), country demo
-(demo_country_report.txt, no evidence files, official data), company (Greenfield PDF + PDF tables + XLSX).
+(demo_country_report.txt, no evidence files, official data), company (Greenfield PDF + PDF tables + XLSX),
+two fictional industry reports (PDF) audited against a World Bank WDI bulk-CSV extract (scripts/make_industry_reports.py).
 Claims are matched to the answer key by the sentence in the key's "source" column when it has the form
 "<file> p.N | <sentence>", otherwise by claim_id.
 """
@@ -35,6 +36,12 @@ DATASETS = [
     dict(name="Company (Greenfield)", report=S / "company_report_2024.pdf",
          evidence=[S / "company_evidence_tables.pdf", S / "company_evidence.xlsx"],
          key=S / "company_answer_key.csv", official=False),
+    dict(name="Industry 1 (India)", report=S / "industry" / "industry_report_1_india.pdf",
+         evidence=[S / "industry" / "worldbank_environment_extract.csv"],
+         key=S / "industry" / "industry_report_1_answer_key.csv", official=False),
+    dict(name="Industry 2 (Europe)", report=S / "industry" / "industry_report_2_europe.pdf",
+         evidence=[S / "industry" / "worldbank_environment_extract.csv"],
+         key=S / "industry" / "industry_report_2_answer_key.csv", official=False),
 ]
 
 
@@ -195,13 +202,16 @@ def main() -> int:
           f"- Date: {dt.datetime.now().strftime('%Y-%m-%d %H:%M')}",
           f"- Command: `{cmd}` (run from the repo root with `PYTHONPATH` set to the repo root)",
           "- Mode: deterministic, `use_llm=False` (regex claim parser, template explanations); reproducible.",
-          f"- Official data: {official_mode()}. Only the Country demo uses it; the PS sample and the company "
-          "dataset run with `use_official=False` (their claims name no country).",
+          f"- Official data: {official_mode()}. Only the Country demo uses it; the PS sample, company and industry "
+          "datasets run with `use_official=False` (their claims name no country).",
           f"- Overall: {total_ok}/{total_k} claims given the expected status.", "",
           "Datasets: **PS sample** (`sample_report_2025.txt` + `evidence_2024_2025.csv`, 6 claims), "
           "**Country demo** (`demo_country_report.txt`, no evidence files, 13 claims), "
           "**Company (Greenfield)** (fictional PDF report p.2-4 + ruled-table PDF + XLSX; built by "
-          "`scripts/make_company_dataset.py`, 15 claims including a PDF/XLSX conflict and two greenwash sentences).",
+          "`scripts/make_company_dataset.py`, 15 claims including a PDF/XLSX conflict and two greenwash sentences), "
+          "**Industry 1 (India)** and **Industry 2 (Europe)** (fictional-publisher PDF reports generated from the real "
+          "World Bank WDI bulk CSV by `scripts/make_industry_reports.py`, 13 and 14 claims, evidence = "
+          "`data/samples/industry/worldbank_environment_extract.csv`).",
           "", "Matching: claims are paired with the answer key by sentence (company) or claim id (others). A claim "
           "the parser did not extract counts as wrong. \"Cited\" = every evidence fact of a Supported/Contradicted "
           "verdict has source, locator and quote. Mean confidence is over checked verdicts only.", "",
@@ -217,7 +227,7 @@ def main() -> int:
     if llm:
         md += ["LLM run:", "", errors_md(llm), ""]
     md += ["## Limitations", "",
-           "- Tiny datasets (6 / 13 / 15 claims): a single claim moves accuracy by 7-17 points; treat as a smoke "
+           "- Tiny datasets (6 / 13 / 15 / 13 / 14 claims): a single claim moves accuracy by 7-17 points; treat as a smoke "
            "benchmark, not a statistical estimate.",
            "- The company report was written by us to match the documented parser phrasings, so extraction recall "
            "is optimistic; real reports are more varied.",

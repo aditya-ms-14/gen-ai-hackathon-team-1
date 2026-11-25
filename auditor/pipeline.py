@@ -70,6 +70,7 @@ def run_audit(report_path: str | Path, evidence_paths: list[str | Path],
         except Exception as exc:  # one bad file must not kill the audit
             errors.append(f"{Path(path).name}: {exc}")
 
+    uploaded = set(source_pages)  # official snapshot text must never replace an uploaded file's text
     report_pages = read_pages(report_path)
     verdicts = []
     for claim in _parse(report_pages, report_year, llm):
@@ -78,9 +79,12 @@ def run_audit(report_path: str | Path, evidence_paths: list[str | Path],
         verdict = verify(claim, evidence)
         verdict.route = evidence.route
         verdict.explanation = narrate(verdict, llm)
-        if any(f.source not in source_pages for f in verdict.evidence):
+        if any(f.source not in uploaded for f in verdict.evidence):
+            # Refresh every time: each live fetch adds lines to a dataset's snapshot text, so text
+            # cached for an earlier claim would miss this claim's quotes (Italy after Germany, ...).
             for name, pages in _official_pages().items():
-                source_pages.setdefault(name, pages)
+                if name not in uploaded:
+                    source_pages[name] = pages
         verdict = apply_guard(verdict, source_pages)
         verdicts.append(score(verdict))
 

@@ -1,0 +1,15 @@
+claim_id,expected_status,expected_computed,expected_flags,why,source
+C01,Supported,-19.26,,939.3 -> 758.4 is -19.3%; claimed -19% (within 1.0 pp),industry_report_2_europe.pdf | Germany's greenhouse gas emissions fell by 19% between 2010 and 2022.
+C02,Contradicted,-19.25,,815.0 -> 658.1 is -19.2%; claimed -39%,industry_report_2_europe.pdf | Germany's CO2 emissions fell by 39% between 2010 and 2022.
+C03,Supported,-23.25,,400.9 -> 307.7 is -23.2%; claimed -23% (within 1.0 pp),industry_report_2_europe.pdf | France's CO2 emissions fell by 23% between 2000 and 2022.
+C04,Supported,-23.49,,4552.2 -> 3483.1 is -23.5%; claimed -23% (within 1.0 pp),industry_report_2_europe.pdf | The European Union's greenhouse gas emissions fell by 23% between 2005 and 2022.
+C05,Supported,-29.49,,578.7 -> 408.1 is -29.5%; claimed -29% (within 1.0 pp),industry_report_2_europe.pdf | Italy's greenhouse gas emissions fell by 29% between 2005 and 2022.
+C06,Supported,39.83,,2021 value is 39.8%; claimed 40%,industry_report_2_europe.pdf | Renewable electricity in Germany reached 40% of total electricity output in 2021.
+C07,Contradicted,17.46,,2021 value is 17.5%; claimed 32%,industry_report_2_europe.pdf | Renewable electricity in Poland reached 32% of total electricity output in 2021.
+C08,Supported,16.2,,2021 value is 16.2%; claimed 16%,industry_report_2_europe.pdf | Renewable energy consumption in France reached 16% of total energy demand in 2021.
+C09,Unsupported,,,World Bank WDI has no 2024 value for this series,industry_report_2_europe.pdf | Renewable energy consumption in the European Union reached 30% of total energy demand in 2024.
+C10,Supported,-36.06,,40.3 -> 25.8 is -36.1%; claimed -36% (within 1.0 pp),industry_report_2_europe.pdf | Germany's freshwater withdrawals fell by 36% between 2005 and 2022.
+C11,Supported,40.02,,2022 value is 40.0%; claimed 40%,industry_report_2_europe.pdf | Forest area in the European Union reached 40% of land area in 2022.
+C12,Contradicted,17.5,,2021 value is 17.5%; claimed 33%,industry_report_2_europe.pdf | Renewable energy consumption in Italy reached 33% of total energy demand in 2021.
+C13,Unsupported,,,the World Bank file has no industrial waste series,industry_report_2_europe.pdf | Germany's industrial waste fell by 12% between 2010 and 2022.
+C14,Unsupported,,greenwash,vague claim with no number or baseline,industry_report_2_europe.pdf | European manufacturers are building a clean and sustainable industrial future together.

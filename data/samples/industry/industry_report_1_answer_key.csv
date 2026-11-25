@@ -1,0 +1,14 @@
+claim_id,expected_status,expected_computed,expected_flags,why,source
+C01,Supported,45.5,,2722.6 -> 3961.5 is +45.5%; claimed +46% (within 1.0 pp),industry_report_1_india.pdf | India's greenhouse gas emissions rose by 46% between 2010 and 2022.
+C02,Supported,130.52,,1217.7 -> 2807.1 is +130.5%; claimed +131% (within 1.0 pp),industry_report_1_india.pdf | India's CO2 emissions rose by 131% between 2005 and 2022.
+C03,Contradicted,23.21,,2278.2 -> 2807.1 is +23.2%; claimed +38%,industry_report_1_india.pdf | India's CO2 emissions rose by 38% between 2015 and 2022.
+C04,Supported,44.57,,35794.0 -> 51748.1 is +44.6%; claimed +45% (within 1.0 pp),industry_report_1_india.pdf | Global greenhouse gas emissions rose by 45% between 2000 and 2022.
+C05,Supported,34.9,,2021 value is 34.9%; claimed 35%,industry_report_1_india.pdf | Renewable energy consumption in India reached 35% of total energy demand in 2021.
+C06,Supported,19.13,,2021 value is 19.1%; claimed 19%,industry_report_1_india.pdf | Renewable electricity in India reached 19% of total electricity output in 2021.
+C07,Contradicted,34.9,,2021 value is 34.9%; claimed 50%,industry_report_1_india.pdf | Renewable energy consumption in India reached 50% of total energy demand in 2021.
+C08,Unsupported,,,World Bank WDI has no 2024 value for this series,industry_report_1_india.pdf | Renewable energy consumption in India reached 38% of total energy demand in 2024.
+C09,Supported,6.08,,610.4 -> 647.5 is +6.1%; claimed +6% (within 1.0 pp),industry_report_1_india.pdf | India's freshwater withdrawals rose by 6% between 2000 and 2022.
+C10,Supported,24.38,,2022 value is 24.4%; claimed 24%,industry_report_1_india.pdf | Forest area in India reached 24% of land area in 2022.
+C11,Contradicted,24.44,,2024 value is 24.4%; claimed 39%,industry_report_1_india.pdf | Forest area in India reached 39% of land area in 2024.
+C12,Unsupported,,,the World Bank file has no industrial waste series,industry_report_1_india.pdf | India's industrial waste fell by 15% between 2010 and 2022.
+C13,Unsupported,,greenwash,vague claim with no number or baseline,industry_report_1_india.pdf | India's heavy industry is committed to clean and sustainable manufacturing for the decades ahead.
