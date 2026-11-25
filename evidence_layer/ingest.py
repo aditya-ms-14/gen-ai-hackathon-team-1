@@ -3,6 +3,8 @@
 Turns evidence files into Evidence Ledger facts and Hybrid Index chunks,
 keeping file + page + row for every value.
 
+- World Bank WDI bulk CSV (preamble + Country Code / Indicator Code): converted by worldbank_bulk.py
+  to the long layout below; entity = the WB code (WLD, EUU, ...).
 - CSV / XLSX tables in "wide" (indicator, unit, 2024, 2025...) or "long"
   (indicator, year, value, unit) layout. Optional "entity" / "country" column
   -> ISO3 code (auditor.entities.country_code); blank or unknown = the reporting org.
@@ -20,6 +22,7 @@ from __future__ import annotations
 
 import re
 import unicodedata
+from functools import lru_cache
 from pathlib import Path
 from typing import Callable, Optional
 
@@ -28,6 +31,7 @@ import pandas as pd
 from auditor.entities import country_code, find_country
 from auditor.indicators import INDICATORS, is_share, match_indicator
 from auditor.schemas import Chunk, ExtractionMethod, Fact, SourceType
+from evidence_layer.worldbank_bulk import is_worldbank_bulk, read_worldbank_bulk
 
 TABLE_EXTS = {".csv", ".xlsx", ".xls"}
 TEXT_EXTS = {".pdf", ".txt", ".md"}
@@ -85,12 +89,25 @@ def norm(text: str) -> str:
 
 # ---- tables (CSV / XLSX / PDF) ---------------------------------------------
 
+_TABLE_CACHE: dict[tuple, pd.DataFrame] = {}
+
+
 def _read_table(p: Path) -> pd.DataFrame:
-    if p.suffix.lower() == ".csv":
+    """Parsed table, cached per (path, mtime, size) so ingest + read_pages parse a big file once. Do not mutate."""
+    st = p.stat()
+    key = (str(p.resolve()), st.st_mtime_ns, st.st_size)
+    if key in _TABLE_CACHE:
+        return _TABLE_CACHE[key]
+    if p.suffix.lower() == ".csv" and is_worldbank_bulk(p):
+        df = read_worldbank_bulk(p)
+    elif p.suffix.lower() == ".csv":
         df = pd.read_csv(p, dtype=str, keep_default_na=False)
     else:
         df = pd.read_excel(p, dtype=str).fillna("")
     df.columns = [str(c).strip() for c in df.columns]
+    if len(_TABLE_CACHE) >= 4:
+        _TABLE_CACHE.pop(next(iter(_TABLE_CACHE)))
+    _TABLE_CACHE[key] = df
     return df
 
 
@@ -131,8 +148,9 @@ def _is_header(row: list[str]) -> bool:
 def _rows_to_facts(header: list[str], rows: list[list[str]], *, source: str, page: Optional[int],
                    quote_for: Callable[[int, list[str], int], Optional[str]],
                    locator_for: Callable[[int], str], id_for: Callable[[int, int], str],
-                   default_source_type: SourceType, method: ExtractionMethod) -> list[Fact]:
-    """Wide or long table rows -> facts. quote_for(row_no, cells, value_col) may veto a fact by returning None."""
+                   default_source_type: SourceType, method: ExtractionMethod,
+                   entity_codes: bool = False) -> list[Fact]:
+    """Wide or long table rows -> facts. entity_codes: the entity column already holds codes (World Bank bulk). quote_for(row_no, cells, value_col) may veto a fact by returning None."""
     header = [str(h or "").strip() for h in header]
     cols = {h.lower(): j for j, h in enumerate(header) if h}
     year_cols = [(j, y) for j, h in enumerate(header) if (y := _year(h))]
@@ -143,14 +161,17 @@ def _rows_to_facts(header: list[str], rows: list[list[str]], *, source: str, pag
     unit_j, st_j = cols.get("unit"), cols.get("source_type")
     ent_j = cols.get("entity", cols.get("country"))
     facts: list[Fact] = []
+    indicator_of = lru_cache(maxsize=None)(match_indicator)
 
     for i, raw in enumerate(rows):
         row = [str(c if c is not None else "").strip() for c in raw] + [""] * max(0, len(header) - len(raw))
-        indicator = match_indicator(row[ind_j])
+        indicator = indicator_of(row[ind_j])
         if not indicator:
             continue
         unit = row[unit_j] if unit_j is not None else _unit_in_label(row[ind_j])
-        entity = country_code(row[ent_j]) if ent_j is not None and row[ent_j] else None
+        entity = None
+        if ent_j is not None and row[ent_j]:
+            entity = row[ent_j].upper() if entity_codes else country_code(row[ent_j])
         source_type = _source_type(row[st_j], default_source_type) if st_j is not None else default_source_type
         if long:
             cells = [(cols["value"], y)] if (y := _year(row[cols["year"]])) else []
@@ -179,6 +200,7 @@ def _table_facts(p: Path, default_source_type: SourceType) -> list[Fact]:
         quote_for=lambda i, row, j: lines[i + 1], locator_for=lambda i: f"row {i + 2}",
         id_for=lambda i, year: f"{p.name}#r{i + 2}-{year}",
         default_source_type=default_source_type, method=ExtractionMethod.TABLE,
+        entity_codes=is_worldbank_bulk(p),
     )
 
 
