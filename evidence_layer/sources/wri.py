@@ -12,7 +12,7 @@ from __future__ import annotations
 
 from urllib.parse import urlencode
 
-from ._common import AGGREGATES, Connector, Row, get_json
+from evidence_layer.sources._common import AGGREGATES, Connector, Row, get_json
 
 API = "https://www.climatewatchdata.org/api/v1/data/historical_emissions"
 

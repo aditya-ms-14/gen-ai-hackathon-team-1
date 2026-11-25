@@ -10,7 +10,7 @@ import json
 import threading
 from pathlib import Path
 
-from ._common import CACHE_DIR, Connector, Row, _fresh, download
+from evidence_layer.sources._common import CACHE_DIR, Connector, Row, _fresh, download
 
 DATASETS = {
     "co2": "https://raw.githubusercontent.com/owid/co2-data/master/owid-co2-data.csv",

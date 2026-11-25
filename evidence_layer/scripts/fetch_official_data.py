@@ -2,7 +2,7 @@
 
     .venv\\Scripts\\python.exe scripts\\fetch_official_data.py
 
-Pulls every mapped series of every source in auditor.sources for the demo
+Pulls every mapped series of every source in evidence_layer.sources for the demo
 entities and years, writes data/official/<source>.csv (one canonical line per
 series/entity/year: the same line that becomes a Fact quote) and
 data/official/manifest.json. If a source is unreachable, its previous snapshot
@@ -16,11 +16,11 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]  # repo root (evidence_layer/scripts/ -> ../..)
 sys.path.insert(0, str(ROOT))
 
-from auditor.sources import CONNECTORS  # noqa: E402
-from auditor.sources._common import OFFICIAL_DIR, snapshot_rows, write_snapshot  # noqa: E402
+from evidence_layer.sources import CONNECTORS  # noqa: E402
+from evidence_layer.sources._common import OFFICIAL_DIR, snapshot_rows, write_snapshot  # noqa: E402
 
 ENTITIES = ["DEU", "IND", "USA", "GBR", "FRA", "CHN", "BRA", "WLD", "EUU"]
 YEARS = [1990, 2000, 2005, *range(2010, 2024)]   # common baselines + 2010-2023

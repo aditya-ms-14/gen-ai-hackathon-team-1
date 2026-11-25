@@ -11,7 +11,7 @@ from __future__ import annotations
 from collections import defaultdict
 from typing import Optional
 
-from .schemas import Fact
+from auditor.schemas import Fact
 
 Key = tuple[str, int, Optional[str]]
 

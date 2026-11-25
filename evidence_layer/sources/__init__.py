@@ -19,17 +19,17 @@ from __future__ import annotations
 import logging
 from typing import Iterable, Optional
 
-from ..entities import country_code
-from ..schemas import Fact
-from ._common import AGGREGATES, Connector, is_offline, page_text, set_offline
-from .eea import EEA
-from .owid import OurWorldInData
-from .unep import UNEP
-from .unfccc import UNFCCC
-from .worldbank import WorldBank
-from .wri import ClimateWatch
+from auditor.entities import country_code
+from auditor.schemas import Fact
+from evidence_layer.sources._common import AGGREGATES, Connector, is_offline, page_text, set_offline
+from evidence_layer.sources.eea import EEA
+from evidence_layer.sources.owid import OurWorldInData
+from evidence_layer.sources.unep import UNEP
+from evidence_layer.sources.unfccc import UNFCCC
+from evidence_layer.sources.worldbank import WorldBank
+from evidence_layer.sources.wri import ClimateWatch
 
-log = logging.getLogger("auditor.sources")
+log = logging.getLogger("evidence_layer.sources")
 
 CONNECTORS: list[Connector] = [WorldBank(), OurWorldInData(), ClimateWatch(), UNFCCC(), UNEP(), EEA()]
 # Same-definition sources first: WB and EEA measure renewables as a share of FINAL energy

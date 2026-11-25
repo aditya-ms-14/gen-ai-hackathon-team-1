@@ -25,9 +25,9 @@ from typing import Callable, Optional
 
 import pandas as pd
 
-from .entities import country_code, find_country
-from .indicators import INDICATORS, is_share, match_indicator
-from .schemas import Chunk, ExtractionMethod, Fact, SourceType
+from auditor.entities import country_code, find_country
+from auditor.indicators import INDICATORS, is_share, match_indicator
+from auditor.schemas import Chunk, ExtractionMethod, Fact, SourceType
 
 TABLE_EXTS = {".csv", ".xlsx", ".xls"}
 TEXT_EXTS = {".pdf", ".txt", ".md"}

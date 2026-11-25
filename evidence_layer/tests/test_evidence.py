@@ -6,11 +6,11 @@ import types
 import pymupdf
 import pytest
 
-from auditor import retrieval
-from auditor.ingest import ingest_file, norm, read_pages
-from auditor.ledger import Ledger
-from auditor.resolver import resolve
-from auditor.retrieval import HybridIndex, rrf
+from evidence_layer import retrieval
+from evidence_layer.ingest import ingest_file, norm, read_pages
+from evidence_layer.ledger import Ledger
+from evidence_layer.resolver import resolve
+from evidence_layer.retrieval import HybridIndex, rrf
 from auditor.schemas import Chunk, Claim, Direction, ExtractionMethod, Fact, Metric, SourceType
 
 
@@ -120,9 +120,9 @@ def fake_sources(monkeypatch):
                      source_type=SourceType.OFFICIAL, entity=entity)
                 for y, v in {2024: 750.0, 2025: 690.0}.items() if y in years]
 
-    module = types.ModuleType("auditor.sources")
+    module = types.ModuleType("evidence_layer.sources")
     module.fetch_official = fetch_official
-    monkeypatch.setitem(sys.modules, "auditor.sources", module)
+    monkeypatch.setitem(sys.modules, "evidence_layer.sources", module)
     return calls
 
 
@@ -144,7 +144,7 @@ def test_official_hook_respects_switch_and_org_claims(fake_sources):
 
 
 def test_resolver_works_without_sources_package(monkeypatch):
-    monkeypatch.setitem(sys.modules, "auditor.sources", None)  # import raises ImportError
+    monkeypatch.setitem(sys.modules, "evidence_layer.sources", None)  # import raises ImportError
     ev = resolve(_claim(entity="DEU"), Ledger(), HybridIndex(dense=False))
     assert ev.route == "none" and ev.facts == []
 

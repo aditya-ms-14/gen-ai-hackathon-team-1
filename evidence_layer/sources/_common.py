@@ -23,12 +23,12 @@ from typing import Optional
 
 import requests
 
-from ..schemas import ExtractionMethod, Fact, SourceType
+from auditor.schemas import ExtractionMethod, Fact, SourceType
 
-log = logging.getLogger("auditor.sources")
+log = logging.getLogger("evidence_layer.sources")
 
 ROOT = Path(__file__).resolve().parents[2]
-OFFICIAL_DIR = ROOT / "data" / "official"
+OFFICIAL_DIR = ROOT / "evidence_layer" / "data" / "official"  # curated snapshots ship with the evidence layer
 CACHE_DIR = ROOT / "data" / "runtime" / "cache"
 HEADER = "series,entity,year,value,unit"
 TIMEOUT = (5, 15)            # connect, read (seconds); never more than 15 s per request

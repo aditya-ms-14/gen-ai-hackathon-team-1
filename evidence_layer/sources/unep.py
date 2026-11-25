@@ -12,7 +12,7 @@ from urllib.parse import urlencode
 
 import pycountry
 
-from ._common import Connector, Row, get_json
+from evidence_layer.sources._common import Connector, Row, get_json
 
 API = "https://unstats.un.org/sdgapi/v1/sdg/Series/Data"
 

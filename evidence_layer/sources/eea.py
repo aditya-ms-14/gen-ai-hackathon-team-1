@@ -19,7 +19,7 @@ from __future__ import annotations
 
 import pycountry
 
-from ._common import Connector, Row, get_json
+from evidence_layer.sources._common import Connector, Row, get_json
 
 PAGE = "https://www.eea.europa.eu/en/europe-environment-2025/countries/{country}/{chart}"
 API = "https://www.eea.europa.eu/++api++/en/europe-environment-2025/countries/{country}/{chart}"

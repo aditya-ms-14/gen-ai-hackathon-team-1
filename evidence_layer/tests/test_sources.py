@@ -6,12 +6,12 @@ from pathlib import Path
 import pytest
 import requests
 
-import auditor.sources as sources
-from auditor.sources import _common, fetch_official, set_offline, snapshot_pages
-from auditor.sources._common import HEADER, OFFICIAL_DIR, Row
+import evidence_layer.sources as sources
+from evidence_layer.sources import _common, fetch_official, set_offline, snapshot_pages
+from evidence_layer.sources._common import HEADER, OFFICIAL_DIR, Row
 from auditor.schemas import Direction, ExtractionMethod, Metric, SourceType
 
-SAMPLES = Path(__file__).resolve().parents[1] / "data" / "samples"
+SAMPLES = Path(__file__).resolve().parents[2] / "data" / "samples"
 TOL_PP = 1.0
 
 
@@ -130,7 +130,7 @@ def test_snapshot_files_are_small_and_canonical():
 # ---------------------------------------------------------------- demo dataset
 
 def _demo_claims():
-    from auditor.claims import detect_report_year, parse_claim_regex, split_claims
+    from llm_router.claims import detect_report_year, parse_claim_regex, split_claims
     from auditor.entities import find_country
 
     text = (SAMPLES / "demo_country_report.txt").read_text(encoding="utf-8")
@@ -190,8 +190,8 @@ def test_demo_answer_key_matches_snapshot_values():
 
 def test_demo_claims_through_verifier_and_scoring():
     from auditor.schemas import Evidence
-    from auditor.scoring import score
-    from auditor.verifier import verify
+    from trust_layer.scoring import score
+    from trust_layer.verifier import verify
 
     key = _answer_key()
     for claim in _demo_claims():

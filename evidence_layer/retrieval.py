@@ -20,7 +20,7 @@ import re
 import threading
 from typing import Optional
 
-from .schemas import Chunk
+from auditor.schemas import Chunk
 
 _TOKEN = re.compile(r"[a-z0-9]+")
 EMBED_MODEL = "all-MiniLM-L6-v2"

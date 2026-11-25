@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import pycountry
 
-from ._common import Connector, Row, get_json
+from evidence_layer.sources._common import Connector, Row, get_json
 
 API = "https://api.worldbank.org/v2/country/{entity}/indicator/{series}"
 _ISO2 = {"WLD": "1W", "EUU": "EU"}

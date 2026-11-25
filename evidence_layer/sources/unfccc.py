@@ -7,7 +7,7 @@ Annex I is tried first, then non-Annex I.
 """
 from __future__ import annotations
 
-from .wri import API, ClimateWatchBase
+from evidence_layer.sources.wri import API, ClimateWatchBase
 
 
 class UNFCCC(ClimateWatchBase):

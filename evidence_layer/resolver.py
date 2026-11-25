@@ -2,7 +2,7 @@
 
 1. Ledger lookup by (indicator, year, claim.entity).
 2. Ledger miss + claim about a country/aggregate + use_official:
-   auditor.sources.fetch_official(indicator, entity, years) -> facts, added to
+   evidence_layer.sources.fetch_official(indicator, entity, years) -> facts, added to
    the ledger (route "official").
 3. Still missing: hybrid search for passages; if an LLM is available, ask it
    for {value, unit, year, quote} per missing year and keep the answer only if
@@ -15,12 +15,12 @@ from __future__ import annotations
 import re
 from typing import Optional
 
-from .indicators import label
-from .ingest import norm
-from .ledger import Ledger
-from .retrieval import HybridIndex
-from .schemas import Chunk, Claim, Evidence, ExtractionMethod, Fact, Metric
-from .units import is_pp
+from auditor.indicators import label
+from evidence_layer.ingest import norm
+from evidence_layer.ledger import Ledger
+from evidence_layer.retrieval import HybridIndex
+from auditor.schemas import Chunk, Claim, Evidence, ExtractionMethod, Fact, Metric
+from trust_layer.units import is_pp
 
 LLM_PASSAGES = 3
 _NUM = re.compile(r"(?<![\w.])\d[\d,]*(?:\.\d+)?")
@@ -98,9 +98,9 @@ def resolve(claim: Claim, ledger: Ledger, index: HybridIndex, llm: Optional[obje
 # ---- official data -----------------------------------------------------------
 
 def fetch_official(indicator: str, entity: str, years: list[int]) -> list[Fact]:
-    """auditor.sources.fetch_official, if that package exists; only facts that answer this exact question."""
+    """evidence_layer.sources.fetch_official, if that package exists; only facts that answer this exact question."""
     try:
-        from .sources import fetch_official as fetch
+        from evidence_layer.sources import fetch_official as fetch
     except ImportError:
         return []
     try:
