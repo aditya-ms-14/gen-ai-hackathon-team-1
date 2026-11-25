@@ -1,0 +1,46 @@
+# Citation Auditor theme: warm paper (light) and ink (dark) palettes from the team's HTML design.
+# Streamlit follows the viewer's system setting; both palettes are switchable from the app menu.
+
+[browser]
+# Don't send Streamlit's anonymous usage statistics.
+gatherUsageStats = false
+
+[theme]
+font = "Fraunces:https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;1,9..144,400&display=swap"
+headingFont = "Fraunces:https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;1,9..144,400&display=swap"
+codeFont = "JetBrains Mono:https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap"
+baseRadius = "2px"
+buttonRadius = "2px"
+showWidgetBorder = true
+
+[theme.light]
+primaryColor = "#1d2320"
+backgroundColor = "#f4efe6"
+secondaryBackgroundColor = "#fbf8f2"
+textColor = "#1d2320"
+borderColor = "#d9d2c3"
+dataframeBorderColor = "#d9d2c3"
+dataframeHeaderBackgroundColor = "#efe8da"
+linkColor = "#2d6a4f"
+greenColor = "#2d6a4f"
+redColor = "#b3261e"
+yellowColor = "#9a6a00"
+orangeColor = "#9a6a00"
+grayColor = "#6b706a"
+codeBackgroundColor = "#efe4c4"
+
+[theme.dark]
+primaryColor = "#ece7da"
+backgroundColor = "#141816"
+secondaryBackgroundColor = "#1c211e"
+textColor = "#ece7da"
+borderColor = "#323a35"
+dataframeBorderColor = "#323a35"
+dataframeHeaderBackgroundColor = "#232925"
+linkColor = "#7fd1a0"
+greenColor = "#7fd1a0"
+redColor = "#ff8b80"
+yellowColor = "#e8bb55"
+orangeColor = "#e8bb55"
+grayColor = "#9aa096"
+codeBackgroundColor = "#2e2b1a"

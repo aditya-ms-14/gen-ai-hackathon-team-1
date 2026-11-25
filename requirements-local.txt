@@ -1,0 +1,4 @@
+# Full local install: everything in requirements.txt plus dense retrieval.
+# sentence-transformers pulls torch (large); the app falls back to BM25 automatically without it.
+-r requirements.txt
+sentence-transformers

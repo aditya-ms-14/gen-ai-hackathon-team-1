@@ -1,0 +1,14 @@
+claim_id,expected_status,expected_computed,expected_flags,why,source
+C01,Supported,-19.25,,814.962 -> 658.0886 Mt CO2e is -19.25%; claimed -19% (within 1.0 pp),World Bank WDI · EN.GHG.CO2.MT.CE.AR5 · DEU · 2010/2022
+C02,Contradicted,45.5,,2722.6207 -> 3961.5256 Mt CO2e is +45.5%; claimed +25%,World Bank WDI · EN.GHG.ALL.MT.CE.AR5 · IND · 2010/2022
+C03,Supported,-45.59,,778.1311 -> 423.3672 Mt CO2e is -45.59%; claimed -46% (within 1.0 pp),World Bank WDI · EN.GHG.ALL.MT.CE.AR5 · GBR · 1990/2022
+C04,Contradicted,-28.39,,4864.2774 -> 3483.1059 Mt CO2e is -28.39%; claimed -40%,World Bank WDI · EN.GHG.ALL.MT.CE.AR5 · EUU · 1990/2022
+C05,Supported,46.79,,35793.9804 -> 52540.7659 Mt CO2e is +46.79%; claimed +47% (within 1.0 pp),World Bank WDI · EN.GHG.ALL.MT.CE.AR5 · WLD · 2000/2023
+C06,Contradicted,-18.21,,5888.1657 -> 4815.7665 Mt CO2e is -18.21%; claimed -30%,World Bank WDI · EN.GHG.CO2.MT.CE.AR5 · USA · 2005/2022
+C07,Supported,17.6,,2021 share of renewables in final energy is 17.6%; claimed 18% (within 1.0 pp),World Bank WDI · EG.FEC.RNEW.ZS · DEU · 2021
+C08,Contradicted,77.38,,2021 renewable electricity output is 77.3753%; claimed 90%,World Bank WDI · EG.ELC.RNEW.ZS · BRA · 2021
+C09,Supported,59.33,,2022 forest area is 59.326% of land; claimed 59.3% (within 1.0 pp),World Bank WDI · AG.LND.FRST.ZS · BRA · 2022
+C10,Unsupported,,,France has a 2010 withdrawal figure but no source publishes 2023 yet,World Bank WDI · ER.H2O.FWTL.K3 · FRA · 2010 only
+C11,Unsupported,,,no official source in data/official has waste data for China,none
+C12,Unsupported,,,no official source publishes a biodiversity index,none
+C13,Unsupported,,greenwash,vague claim with no number or baseline,none
