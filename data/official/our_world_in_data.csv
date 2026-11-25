@@ -1,0 +1,766 @@
+series,entity,year,value,unit
+co2,BRA,1990,218.658,Mt CO2
+co2,BRA,2000,340.183,Mt CO2
+co2,BRA,2005,364.371,Mt CO2
+co2,BRA,2010,440.269,Mt CO2
+co2,BRA,2011,461.911,Mt CO2
+co2,BRA,2012,497.468,Mt CO2
+co2,BRA,2013,531.569,Mt CO2
+co2,BRA,2014,556.526,Mt CO2
+co2,BRA,2015,528.174,Mt CO2
+co2,BRA,2016,491.745,Mt CO2
+co2,BRA,2017,497.152,Mt CO2
+co2,BRA,2018,476.437,Mt CO2
+co2,BRA,2019,476.73,Mt CO2
+co2,BRA,2020,445.645,Mt CO2
+co2,BRA,2021,496.151,Mt CO2
+co2,BRA,2022,480.648,Mt CO2
+co2,BRA,2023,485.673,Mt CO2
+co2,CHN,1990,2488.302,Mt CO2
+co2,CHN,2000,3658.905,Mt CO2
+co2,CHN,2005,5914.04,Mt CO2
+co2,CHN,2010,8686.878,Mt CO2
+co2,CHN,2011,9601.6,Mt CO2
+co2,CHN,2012,9848.734,Mt CO2
+co2,CHN,2013,10019.536,Mt CO2
+co2,CHN,2014,10050.2,Mt CO2
+co2,CHN,2015,9941.315,Mt CO2
+co2,CHN,2016,9836.63,Mt CO2
+co2,CHN,2017,10096.861,Mt CO2
+co2,CHN,2018,10436.858,Mt CO2
+co2,CHN,2019,10674.799,Mt CO2
+co2,CHN,2020,10872.561,Mt CO2
+co2,CHN,2021,11304.717,Mt CO2
+co2,CHN,2022,11695.013,Mt CO2
+co2,CHN,2023,12303.093,Mt CO2
+co2,DEU,1990,1054.796,Mt CO2
+co2,DEU,2000,898.974,Mt CO2
+co2,DEU,2005,866.91,Mt CO2
+co2,DEU,2010,829.787,Mt CO2
+co2,DEU,2011,805.771,Mt CO2
+co2,DEU,2012,814.787,Mt CO2
+co2,DEU,2013,834.504,Mt CO2
+co2,DEU,2014,794.688,Mt CO2
+co2,DEU,2015,798.771,Mt CO2
+co2,DEU,2016,800.432,Mt CO2
+co2,DEU,2017,788.561,Mt CO2
+co2,DEU,2018,758.195,Mt CO2
+co2,DEU,2019,709.773,Mt CO2
+co2,DEU,2020,646.683,Mt CO2
+co2,DEU,2021,679.946,Mt CO2
+co2,DEU,2022,670.017,Mt CO2
+co2,DEU,2023,591.373,Mt CO2
+co2,EUU,1990,3868.61,Mt CO2
+co2,EUU,2000,3600.589,Mt CO2
+co2,EUU,2005,3733.852,Mt CO2
+co2,EUU,2010,3422.049,Mt CO2
+co2,EUU,2011,3318.177,Mt CO2
+co2,EUU,2012,3248.908,Mt CO2
+co2,EUU,2013,3170.172,Mt CO2
+co2,EUU,2014,3029.897,Mt CO2
+co2,EUU,2015,3082.744,Mt CO2
+co2,EUU,2016,3087.217,Mt CO2
+co2,EUU,2017,3113.046,Mt CO2
+co2,EUU,2018,3039.406,Mt CO2
+co2,EUU,2019,2896.926,Mt CO2
+co2,EUU,2020,2616.057,Mt CO2
+co2,EUU,2021,2793.792,Mt CO2
+co2,EUU,2022,2727.096,Mt CO2
+co2,EUU,2023,2470.122,Mt CO2
+co2,FRA,1990,395.749,Mt CO2
+co2,FRA,2000,408.188,Mt CO2
+co2,FRA,2005,416.994,Mt CO2
+co2,FRA,2010,377.571,Mt CO2
+co2,FRA,2011,355.115,Mt CO2
+co2,FRA,2012,357.948,Mt CO2
+co2,FRA,2013,360.077,Mt CO2
+co2,FRA,2014,327.976,Mt CO2
+co2,FRA,2015,332.106,Mt CO2
+co2,FRA,2016,335.762,Mt CO2
+co2,FRA,2017,338.498,Mt CO2
+co2,FRA,2018,322.979,Mt CO2
+co2,FRA,2019,316.384,Mt CO2
+co2,FRA,2020,281.49,Mt CO2
+co2,FRA,2021,307.543,Mt CO2
+co2,FRA,2022,294.834,Mt CO2
+co2,FRA,2023,269.879,Mt CO2
+co2,GBR,1990,601.945,Mt CO2
+co2,GBR,2000,569.034,Mt CO2
+co2,GBR,2005,570.338,Mt CO2
+co2,GBR,2010,511.905,Mt CO2
+co2,GBR,2011,469.713,Mt CO2
+co2,GBR,2012,487.477,Mt CO2
+co2,GBR,2013,477.611,Mt CO2
+co2,GBR,2014,438.807,Mt CO2
+co2,GBR,2015,422.461,Mt CO2
+co2,GBR,2016,399.43,Mt CO2
+co2,GBR,2017,387.367,Mt CO2
+co2,GBR,2018,379.73,Mt CO2
+co2,GBR,2019,364.753,Mt CO2
+co2,GBR,2020,326.263,Mt CO2
+co2,GBR,2021,342.666,Mt CO2
+co2,GBR,2022,310.4,Mt CO2
+co2,GBR,2023,307.371,Mt CO2
+co2,IND,1990,584.082,Mt CO2
+co2,IND,2000,959.812,Mt CO2
+co2,IND,2005,1181.595,Mt CO2
+co2,IND,2010,1679.223,Mt CO2
+co2,IND,2011,1765.92,Mt CO2
+co2,IND,2012,1926.721,Mt CO2
+co2,IND,2013,1996.681,Mt CO2
+co2,IND,2014,2147.307,Mt CO2
+co2,IND,2015,2230.039,Mt CO2
+co2,IND,2016,2349.954,Mt CO2
+co2,IND,2017,2424.845,Mt CO2
+co2,IND,2018,2592.668,Mt CO2
+co2,IND,2019,2607.452,Mt CO2
+co2,IND,2020,2418.975,Mt CO2
+co2,IND,2021,2670.357,Mt CO2
+co2,IND,2022,2821.41,Mt CO2
+co2,IND,2023,3049.351,Mt CO2
+co2,USA,1990,5129.972,Mt CO2
+co2,USA,2000,6019.104,Mt CO2
+co2,USA,2005,6125.21,Mt CO2
+co2,USA,2010,5664.485,Mt CO2
+co2,USA,2011,5533.933,Mt CO2
+co2,USA,2012,5327.134,Mt CO2
+co2,USA,2013,5466.695,Mt CO2
+co2,USA,2014,5530.072,Mt CO2
+co2,USA,2015,5366.323,Mt CO2
+co2,USA,2016,5248.498,Mt CO2
+co2,USA,2017,5193.973,Mt CO2
+co2,USA,2018,5358.224,Mt CO2
+co2,USA,2019,5237.876,Mt CO2
+co2,USA,2020,4693.881,Mt CO2
+co2,USA,2021,5018.117,Mt CO2
+co2,USA,2022,5065.986,Mt CO2
+co2,USA,2023,4924.078,Mt CO2
+co2,WLD,1990,22779.531,Mt CO2
+co2,WLD,2000,25507.824,Mt CO2
+co2,WLD,2005,29632.664,Mt CO2
+co2,WLD,2010,33323.945,Mt CO2
+co2,WLD,2011,34511.473,Mt CO2
+co2,WLD,2012,34924.852,Mt CO2
+co2,WLD,2013,35265.227,Mt CO2
+co2,WLD,2014,35522.059,Mt CO2
+co2,WLD,2015,35485.73,Mt CO2
+co2,WLD,2016,35487.797,Mt CO2
+co2,WLD,2017,36074.031,Mt CO2
+co2,WLD,2018,36863.242,Mt CO2
+co2,WLD,2019,37060.625,Mt CO2
+co2,WLD,2020,35095.285,Mt CO2
+co2,WLD,2021,36889.07,Mt CO2
+co2,WLD,2022,37471.129,Mt CO2
+co2,WLD,2023,38138.914,Mt CO2
+primary_energy_consumption,BRA,1990,1562.972,TWh
+primary_energy_consumption,BRA,2000,2364.255,TWh
+primary_energy_consumption,BRA,2005,2569.063,TWh
+primary_energy_consumption,BRA,2010,3188.735,TWh
+primary_energy_consumption,BRA,2011,3316.323,TWh
+primary_energy_consumption,BRA,2012,3408.335,TWh
+primary_energy_consumption,BRA,2013,3500.955,TWh
+primary_energy_consumption,BRA,2014,3575.635,TWh
+primary_energy_consumption,BRA,2015,3535.438,TWh
+primary_energy_consumption,BRA,2016,3451.454,TWh
+primary_energy_consumption,BRA,2017,3477.629,TWh
+primary_energy_consumption,BRA,2018,3486.378,TWh
+primary_energy_consumption,BRA,2019,3567.019,TWh
+primary_energy_consumption,BRA,2020,3422.429,TWh
+primary_energy_consumption,BRA,2021,3581.199,TWh
+primary_energy_consumption,BRA,2022,3731.718,TWh
+primary_energy_consumption,BRA,2023,3853.746,TWh
+primary_energy_consumption,CHN,1990,7938.25,TWh
+primary_energy_consumption,CHN,2000,11800.284,TWh
+primary_energy_consumption,CHN,2005,21027.164,TWh
+primary_energy_consumption,CHN,2010,29055.609,TWh
+primary_energy_consumption,CHN,2011,31336.537,TWh
+primary_energy_consumption,CHN,2012,32624.18,TWh
+primary_energy_consumption,CHN,2013,33852.566,TWh
+primary_energy_consumption,CHN,2014,34729.066,TWh
+primary_energy_consumption,CHN,2015,35135.988,TWh
+primary_energy_consumption,CHN,2016,35277.711,TWh
+primary_energy_consumption,CHN,2017,36649.383,TWh
+primary_energy_consumption,CHN,2018,38409.82,TWh
+primary_energy_consumption,CHN,2019,40188.723,TWh
+primary_energy_consumption,CHN,2020,41493.891,TWh
+primary_energy_consumption,CHN,2021,43847.18,TWh
+primary_energy_consumption,CHN,2022,44516.492,TWh
+primary_energy_consumption,CHN,2023,47072.012,TWh
+primary_energy_consumption,DEU,1990,4192.642,TWh
+primary_energy_consumption,DEU,2000,3988.179,TWh
+primary_energy_consumption,DEU,2005,3962.635,TWh
+primary_energy_consumption,DEU,2010,3847.151,TWh
+primary_energy_consumption,DEU,2011,3710.585,TWh
+primary_energy_consumption,DEU,2012,3761.916,TWh
+primary_energy_consumption,DEU,2013,3868.517,TWh
+primary_energy_consumption,DEU,2014,3710.465,TWh
+primary_energy_consumption,DEU,2015,3780.86,TWh
+primary_energy_consumption,DEU,2016,3841.451,TWh
+primary_energy_consumption,DEU,2017,3949.556,TWh
+primary_energy_consumption,DEU,2018,3845.414,TWh
+primary_energy_consumption,DEU,2019,3753.704,TWh
+primary_energy_consumption,DEU,2020,3498.915,TWh
+primary_energy_consumption,DEU,2021,3598.492,TWh
+primary_energy_consumption,DEU,2022,3455.45,TWh
+primary_energy_consumption,DEU,2023,3178.886,TWh
+primary_energy_consumption,EUU,1990,17739.375,TWh
+primary_energy_consumption,EUU,2000,18025.582,TWh
+primary_energy_consumption,EUU,2005,18880.057,TWh
+primary_energy_consumption,EUU,2010,18308.402,TWh
+primary_energy_consumption,EUU,2011,17768.266,TWh
+primary_energy_consumption,EUU,2012,17569.773,TWh
+primary_energy_consumption,EUU,2013,17433.598,TWh
+primary_energy_consumption,EUU,2014,16871.619,TWh
+primary_energy_consumption,EUU,2015,17074.254,TWh
+primary_energy_consumption,EUU,2016,17240.172,TWh
+primary_energy_consumption,EUU,2017,17562.961,TWh
+primary_energy_consumption,EUU,2018,17504.52,TWh
+primary_energy_consumption,EUU,2019,17256.725,TWh
+primary_energy_consumption,EUU,2020,15949.86,TWh
+primary_energy_consumption,EUU,2021,16806.004,TWh
+primary_energy_consumption,EUU,2022,16149.713,TWh
+primary_energy_consumption,EUU,2023,15695.724,TWh
+primary_energy_consumption,FRA,1990,2649.823,TWh
+primary_energy_consumption,FRA,2000,3117.909,TWh
+primary_energy_consumption,FRA,2005,3154.079,TWh
+primary_energy_consumption,FRA,2010,3001.231,TWh
+primary_energy_consumption,FRA,2011,2897.71,TWh
+primary_energy_consumption,FRA,2012,2894.858,TWh
+primary_energy_consumption,FRA,2013,2925.053,TWh
+primary_energy_consumption,FRA,2014,2797.782,TWh
+primary_energy_consumption,FRA,2015,2823.427,TWh
+primary_energy_consumption,FRA,2016,2766.597,TWh
+primary_energy_consumption,FRA,2017,2756.229,TWh
+primary_energy_consumption,FRA,2018,2790.429,TWh
+primary_energy_consumption,FRA,2019,2731.347,TWh
+primary_energy_consumption,FRA,2020,2444.265,TWh
+primary_energy_consumption,FRA,2021,2597.561,TWh
+primary_energy_consumption,FRA,2022,2306.192,TWh
+primary_energy_consumption,FRA,2023,2406.514,TWh
+primary_energy_consumption,GBR,1990,2508.393,TWh
+primary_energy_consumption,GBR,2000,2664.116,TWh
+primary_energy_consumption,GBR,2005,2712.682,TWh
+primary_energy_consumption,GBR,2010,2475.146,TWh
+primary_energy_consumption,GBR,2011,2332.188,TWh
+primary_energy_consumption,GBR,2012,2375.146,TWh
+primary_energy_consumption,GBR,2013,2388.473,TWh
+primary_energy_consumption,GBR,2014,2255.708,TWh
+primary_energy_consumption,GBR,2015,2279.467,TWh
+primary_energy_consumption,GBR,2016,2246.922,TWh
+primary_energy_consumption,GBR,2017,2251.043,TWh
+primary_energy_consumption,GBR,2018,2246.424,TWh
+primary_energy_consumption,GBR,2019,2192.985,TWh
+primary_energy_consumption,GBR,2020,1982.843,TWh
+primary_energy_consumption,GBR,2021,1990.967,TWh
+primary_energy_consumption,GBR,2022,2009.944,TWh
+primary_energy_consumption,GBR,2023,1929.626,TWh
+primary_energy_consumption,IND,1990,2300.701,TWh
+primary_energy_consumption,IND,2000,3725.401,TWh
+primary_energy_consumption,IND,2005,4608.417,TWh
+primary_energy_consumption,IND,2010,6247.89,TWh
+primary_energy_consumption,IND,2011,6587.01,TWh
+primary_energy_consumption,IND,2012,6937.768,TWh
+primary_energy_consumption,IND,2013,7163.062,TWh
+primary_energy_consumption,IND,2014,7652.732,TWh
+primary_energy_consumption,IND,2015,7892.49,TWh
+primary_energy_consumption,IND,2016,8262.856,TWh
+primary_energy_consumption,IND,2017,8571.671,TWh
+primary_energy_consumption,IND,2018,9063.36,TWh
+primary_energy_consumption,IND,2019,9281.595,TWh
+primary_energy_consumption,IND,2020,8792.22,TWh
+primary_energy_consumption,IND,2021,9544.969,TWh
+primary_energy_consumption,IND,2022,10059.478,TWh
+primary_energy_consumption,IND,2023,10827.859,TWh
+primary_energy_consumption,USA,1990,22609.195,TWh
+primary_energy_consumption,USA,2000,26546.236,TWh
+primary_energy_consumption,USA,2005,26912.564,TWh
+primary_energy_consumption,USA,2010,25953.547,TWh
+primary_energy_consumption,USA,2011,25729.088,TWh
+primary_energy_consumption,USA,2012,25047.367,TWh
+primary_energy_consumption,USA,2013,25728.629,TWh
+primary_energy_consumption,USA,2014,25995.914,TWh
+primary_energy_consumption,USA,2015,25747.426,TWh
+primary_energy_consumption,USA,2016,25727.051,TWh
+primary_energy_consumption,USA,2017,25822.156,TWh
+primary_energy_consumption,USA,2018,26768.988,TWh
+primary_energy_consumption,USA,2019,26578.494,TWh
+primary_energy_consumption,USA,2020,24630.395,TWh
+primary_energy_consumption,USA,2021,25956.828,TWh
+primary_energy_consumption,USA,2022,26512.51,TWh
+primary_energy_consumption,USA,2023,26216.545,TWh
+primary_energy_consumption,WLD,1990,95856.289,TWh
+primary_energy_consumption,WLD,2000,110416.398,TWh
+primary_energy_consumption,WLD,2005,127936.719,TWh
+primary_energy_consumption,WLD,2010,141602.047,TWh
+primary_energy_consumption,WLD,2011,144913.297,TWh
+primary_energy_consumption,WLD,2012,147002.422,TWh
+primary_energy_consumption,WLD,2013,149599.734,TWh
+primary_energy_consumption,WLD,2014,151239.172,TWh
+primary_energy_consumption,WLD,2015,152357.625,TWh
+primary_energy_consumption,WLD,2016,154221.484,TWh
+primary_energy_consumption,WLD,2017,157625.312,TWh
+primary_energy_consumption,WLD,2018,161806.125,TWh
+primary_energy_consumption,WLD,2019,163694.609,TWh
+primary_energy_consumption,WLD,2020,157993.891,TWh
+primary_energy_consumption,WLD,2021,166043.5,TWh
+primary_energy_consumption,WLD,2022,169061.531,TWh
+primary_energy_consumption,WLD,2023,172238.781,TWh
+renewables_share_elec,BRA,1990,94.501,%
+renewables_share_elec,BRA,2000,89.491,%
+renewables_share_elec,BRA,2005,87.129,%
+renewables_share_elec,BRA,2010,84.802,%
+renewables_share_elec,BRA,2011,87.193,%
+renewables_share_elec,BRA,2012,82.563,%
+renewables_share_elec,BRA,2013,76.825,%
+renewables_share_elec,BRA,2014,73.279,%
+renewables_share_elec,BRA,2015,74.208,%
+renewables_share_elec,BRA,2016,80.468,%
+renewables_share_elec,BRA,2017,79.247,%
+renewables_share_elec,BRA,2018,82.358,%
+renewables_share_elec,BRA,2019,81.386,%
+renewables_share_elec,BRA,2020,83.167,%
+renewables_share_elec,BRA,2021,77.372,%
+renewables_share_elec,BRA,2022,87.703,%
+renewables_share_elec,BRA,2023,88.995,%
+renewables_share_elec,CHN,1990,20.414,%
+renewables_share_elec,CHN,2000,16.639,%
+renewables_share_elec,CHN,2005,16.173,%
+renewables_share_elec,CHN,2010,18.691,%
+renewables_share_elec,CHN,2011,16.813,%
+renewables_share_elec,CHN,2012,20.041,%
+renewables_share_elec,CHN,2013,20.13,%
+renewables_share_elec,CHN,2014,22.249,%
+renewables_share_elec,CHN,2015,23.968,%
+renewables_share_elec,CHN,2016,24.829,%
+renewables_share_elec,CHN,2017,25.242,%
+renewables_share_elec,CHN,2018,25.612,%
+renewables_share_elec,CHN,2019,26.85,%
+renewables_share_elec,CHN,2020,28.088,%
+renewables_share_elec,CHN,2021,28.694,%
+renewables_share_elec,CHN,2022,30.181,%
+renewables_share_elec,CHN,2023,30.606,%
+renewables_share_elec,DEU,1990,3.522,%
+renewables_share_elec,DEU,2000,6.224,%
+renewables_share_elec,DEU,2005,10.342,%
+renewables_share_elec,DEU,2010,16.887,%
+renewables_share_elec,DEU,2011,20.567,%
+renewables_share_elec,DEU,2012,23.136,%
+renewables_share_elec,DEU,2013,24.131,%
+renewables_share_elec,DEU,2014,26.171,%
+renewables_share_elec,DEU,2015,29.435,%
+renewables_share_elec,DEU,2016,29.482,%
+renewables_share_elec,DEU,2017,33.467,%
+renewables_share_elec,DEU,2018,35.258,%
+renewables_share_elec,DEU,2019,40.189,%
+renewables_share_elec,DEU,2020,44.374,%
+renewables_share_elec,DEU,2021,40.167,%
+renewables_share_elec,DEU,2022,44.373,%
+renewables_share_elec,DEU,2023,54.685,%
+renewables_share_elec,EUU,1990,13.419,%
+renewables_share_elec,EUU,2000,15.518,%
+renewables_share_elec,EUU,2005,15.375,%
+renewables_share_elec,EUU,2010,22.161,%
+renewables_share_elec,EUU,2011,22.208,%
+renewables_share_elec,EUU,2012,25.103,%
+renewables_share_elec,EUU,2013,27.982,%
+renewables_share_elec,EUU,2014,29.645,%
+renewables_share_elec,EUU,2015,29.82,%
+renewables_share_elec,EUU,2016,30.135,%
+renewables_share_elec,EUU,2017,29.909,%
+renewables_share_elec,EUU,2018,32.363,%
+renewables_share_elec,EUU,2019,34.053,%
+renewables_share_elec,EUU,2020,38.495,%
+renewables_share_elec,EUU,2021,37.455,%
+renewables_share_elec,EUU,2022,38.883,%
+renewables_share_elec,EUU,2023,45.24,%
+renewables_share_elec,FRA,1990,13.129,%
+renewables_share_elec,FRA,2000,12.737,%
+renewables_share_elec,FRA,2005,9.66,%
+renewables_share_elec,FRA,2010,13.635,%
+renewables_share_elec,FRA,2011,11.63,%
+renewables_share_elec,FRA,2012,15.02,%
+renewables_share_elec,FRA,2013,17.24,%
+renewables_share_elec,FRA,2014,16.604,%
+renewables_share_elec,FRA,2015,15.996,%
+renewables_share_elec,FRA,2016,17.715,%
+renewables_share_elec,FRA,2017,16.538,%
+renewables_share_elec,FRA,2018,19.757,%
+renewables_share_elec,FRA,2019,19.964,%
+renewables_share_elec,FRA,2020,23.714,%
+renewables_share_elec,FRA,2021,22.187,%
+renewables_share_elec,FRA,2022,24.201,%
+renewables_share_elec,FRA,2023,26.89,%
+renewables_share_elec,GBR,1990,1.792,%
+renewables_share_elec,GBR,2000,2.628,%
+renewables_share_elec,GBR,2005,4.25,%
+renewables_share_elec,GBR,2010,6.852,%
+renewables_share_elec,GBR,2011,9.566,%
+renewables_share_elec,GBR,2012,11.334,%
+renewables_share_elec,GBR,2013,14.852,%
+renewables_share_elec,GBR,2014,19.081,%
+renewables_share_elec,GBR,2015,24.599,%
+renewables_share_elec,GBR,2016,24.474,%
+renewables_share_elec,GBR,2017,29.238,%
+renewables_share_elec,GBR,2018,33,%
+renewables_share_elec,GBR,2019,36.596,%
+renewables_share_elec,GBR,2020,43.065,%
+renewables_share_elec,GBR,2021,39.782,%
+renewables_share_elec,GBR,2022,41.611,%
+renewables_share_elec,GBR,2023,46.378,%
+renewables_share_elec,IND,1990,23.097,%
+renewables_share_elec,IND,2000,14.048,%
+renewables_share_elec,IND,2005,15.254,%
+renewables_share_elec,IND,2010,15.114,%
+renewables_share_elec,IND,2011,16.656,%
+renewables_share_elec,IND,2012,14.868,%
+renewables_share_elec,IND,2013,16.034,%
+renewables_share_elec,IND,2014,15.77,%
+renewables_share_elec,IND,2015,14.625,%
+renewables_share_elec,IND,2016,14.438,%
+renewables_share_elec,IND,2017,15.451,%
+renewables_share_elec,IND,2018,16.294,%
+renewables_share_elec,IND,2019,17.617,%
+renewables_share_elec,IND,2020,19.007,%
+renewables_share_elec,IND,2021,18.791,%
+renewables_share_elec,IND,2022,20.19,%
+renewables_share_elec,IND,2023,19.287,%
+renewables_share_elec,USA,1990,10.917,%
+renewables_share_elec,USA,2000,9.23,%
+renewables_share_elec,USA,2005,8.749,%
+renewables_share_elec,USA,2010,10.318,%
+renewables_share_elec,USA,2011,12.467,%
+renewables_share_elec,USA,2012,12.184,%
+renewables_share_elec,USA,2013,12.831,%
+renewables_share_elec,USA,2014,13.35,%
+renewables_share_elec,USA,2015,13.626,%
+renewables_share_elec,USA,2016,15.288,%
+renewables_share_elec,USA,2017,17.452,%
+renewables_share_elec,USA,2018,17.45,%
+renewables_share_elec,USA,2019,18.295,%
+renewables_share_elec,USA,2020,20.316,%
+renewables_share_elec,USA,2021,20.743,%
+renewables_share_elec,USA,2022,22.35,%
+renewables_share_elec,USA,2023,22.679,%
+renewables_share_elec,WLD,1990,19.06,%
+renewables_share_elec,WLD,2000,18.716,%
+renewables_share_elec,WLD,2005,18.096,%
+renewables_share_elec,WLD,2010,19.721,%
+renewables_share_elec,WLD,2011,20.016,%
+renewables_share_elec,WLD,2012,20.977,%
+renewables_share_elec,WLD,2013,21.712,%
+renewables_share_elec,WLD,2014,22.263,%
+renewables_share_elec,WLD,2015,22.967,%
+renewables_share_elec,WLD,2016,23.732,%
+renewables_share_elec,WLD,2017,24.466,%
+renewables_share_elec,WLD,2018,25.089,%
+renewables_share_elec,WLD,2019,26.071,%
+renewables_share_elec,WLD,2020,27.987,%
+renewables_share_elec,WLD,2021,28.102,%
+renewables_share_elec,WLD,2022,29.47,%
+renewables_share_elec,WLD,2023,30.323,%
+renewables_share_energy,BRA,1990,43.267,%
+renewables_share_energy,BRA,2000,40.939,%
+renewables_share_energy,BRA,2005,41.27,%
+renewables_share_energy,BRA,2010,42.505,%
+renewables_share_energy,BRA,2011,42.378,%
+renewables_share_energy,BRA,2012,40.259,%
+renewables_share_energy,BRA,2013,38.407,%
+renewables_share_energy,BRA,2014,37.566,%
+renewables_share_energy,BRA,2015,38.708,%
+renewables_share_energy,BRA,2016,41.536,%
+renewables_share_energy,BRA,2017,41.294,%
+renewables_share_energy,BRA,2018,44.126,%
+renewables_share_energy,BRA,2019,45.178,%
+renewables_share_energy,BRA,2020,47.116,%
+renewables_share_energy,BRA,2021,43.673,%
+renewables_share_energy,BRA,2022,47.66,%
+renewables_share_energy,BRA,2023,48.95,%
+renewables_share_energy,CHN,1990,4.45,%
+renewables_share_energy,CHN,2000,5.336,%
+renewables_share_energy,CHN,2005,5.239,%
+renewables_share_energy,CHN,2010,7.195,%
+renewables_share_energy,CHN,2011,6.697,%
+renewables_share_energy,CHN,2012,8.068,%
+renewables_share_energy,CHN,2013,8.474,%
+renewables_share_energy,CHN,2014,9.69,%
+renewables_share_energy,CHN,2015,10.278,%
+renewables_share_energy,CHN,2016,11.113,%
+renewables_share_energy,CHN,2017,11.666,%
+renewables_share_energy,CHN,2018,12.224,%
+renewables_share_energy,CHN,2019,12.786,%
+renewables_share_energy,CHN,2020,13.396,%
+renewables_share_energy,CHN,2021,14.195,%
+renewables_share_energy,CHN,2022,15.218,%
+renewables_share_energy,CHN,2023,15.505,%
+renewables_share_energy,DEU,1990,1.264,%
+renewables_share_energy,DEU,2000,2.738,%
+renewables_share_energy,DEU,2005,4.992,%
+renewables_share_energy,DEU,2010,8.465,%
+renewables_share_energy,DEU,2011,10.168,%
+renewables_share_energy,DEU,2012,11.46,%
+renewables_share_energy,DEU,2013,11.603,%
+renewables_share_energy,DEU,2014,12.84,%
+renewables_share_energy,DEU,2015,14.318,%
+renewables_share_energy,DEU,2016,14.101,%
+renewables_share_energy,DEU,2017,15.388,%
+renewables_share_energy,DEU,2018,16.263,%
+renewables_share_energy,DEU,2019,17.811,%
+renewables_share_energy,DEU,2020,20.017,%
+renewables_share_energy,DEU,2021,18.082,%
+renewables_share_energy,DEU,2022,20.329,%
+renewables_share_energy,DEU,2023,23.603,%
+renewables_share_energy,EUU,1990,4.801,%
+renewables_share_energy,EUU,2000,6.501,%
+renewables_share_energy,EUU,2005,6.687,%
+renewables_share_energy,EUU,2010,10.476,%
+renewables_share_energy,EUU,2011,10.687,%
+renewables_share_energy,EUU,2012,12.131,%
+renewables_share_energy,EUU,2013,13.208,%
+renewables_share_energy,EUU,2014,14.118,%
+renewables_share_energy,EUU,2015,14.221,%
+renewables_share_energy,EUU,2016,14.233,%
+renewables_share_energy,EUU,2017,14.029,%
+renewables_share_energy,EUU,2018,15.098,%
+renewables_share_energy,EUU,2019,15.812,%
+renewables_share_energy,EUU,2020,18.448,%
+renewables_share_energy,EUU,2021,17.812,%
+renewables_share_energy,EUU,2022,18.601,%
+renewables_share_energy,EUU,2023,21.294,%
+renewables_share_energy,FRA,1990,5.936,%
+renewables_share_energy,FRA,2000,6.409,%
+renewables_share_energy,FRA,2005,5.122,%
+renewables_share_energy,FRA,2010,7.882,%
+renewables_share_energy,FRA,2011,6.93,%
+renewables_share_energy,FRA,2012,8.714,%
+renewables_share_energy,FRA,2013,9.857,%
+renewables_share_energy,FRA,2014,9.885,%
+renewables_share_energy,FRA,2015,9.568,%
+renewables_share_energy,FRA,2016,10.362,%
+renewables_share_energy,FRA,2017,9.803,%
+renewables_share_energy,FRA,2018,11.513,%
+renewables_share_energy,FRA,2019,11.754,%
+renewables_share_energy,FRA,2020,13.972,%
+renewables_share_energy,FRA,2021,12.914,%
+renewables_share_energy,FRA,2022,13.726,%
+renewables_share_energy,FRA,2023,15.867,%
+renewables_share_energy,GBR,1990,0.643,%
+renewables_share_energy,GBR,2000,1.087,%
+renewables_share_energy,GBR,2005,1.86,%
+renewables_share_energy,GBR,2010,3.043,%
+renewables_share_energy,GBR,2011,4.268,%
+renewables_share_energy,GBR,2012,4.869,%
+renewables_share_energy,GBR,2013,6.655,%
+renewables_share_energy,GBR,2014,8.506,%
+renewables_share_energy,GBR,2015,10.562,%
+renewables_share_energy,GBR,2016,10.659,%
+renewables_share_energy,GBR,2017,12.44,%
+renewables_share_energy,GBR,2018,13.98,%
+renewables_share_energy,GBR,2019,15.684,%
+renewables_share_energy,GBR,2020,19.068,%
+renewables_share_energy,GBR,2021,17.482,%
+renewables_share_energy,GBR,2022,19.072,%
+renewables_share_energy,GBR,2023,19.976,%
+renewables_share_energy,IND,1990,8.068,%
+renewables_share_energy,IND,2000,6.042,%
+renewables_share_energy,IND,2005,6.359,%
+renewables_share_energy,IND,2010,6.057,%
+renewables_share_energy,IND,2011,6.967,%
+renewables_share_energy,IND,2012,6.208,%
+renewables_share_energy,IND,2013,6.75,%
+renewables_share_energy,IND,2014,6.829,%
+renewables_share_energy,IND,2015,6.357,%
+renewables_share_energy,IND,2016,6.37,%
+renewables_share_energy,IND,2017,6.793,%
+renewables_share_energy,IND,2018,7.307,%
+renewables_share_energy,IND,2019,8.108,%
+renewables_share_energy,IND,2020,8.893,%
+renewables_share_energy,IND,2021,8.657,%
+renewables_share_energy,IND,2022,9.421,%
+renewables_share_energy,IND,2023,8.861,%
+renewables_share_energy,USA,1990,4.516,%
+renewables_share_energy,USA,2000,3.856,%
+renewables_share_energy,USA,2005,4.055,%
+renewables_share_energy,USA,2010,5.642,%
+renewables_share_energy,USA,2011,6.653,%
+renewables_share_energy,USA,2012,6.652,%
+renewables_share_energy,USA,2013,6.888,%
+renewables_share_energy,USA,2014,7.015,%
+renewables_share_energy,USA,2015,7.219,%
+renewables_share_energy,USA,2016,7.993,%
+renewables_share_energy,USA,2017,8.755,%
+renewables_share_energy,USA,2018,8.64,%
+renewables_share_energy,USA,2019,8.967,%
+renewables_share_energy,USA,2020,10.123,%
+renewables_share_energy,USA,2021,10.116,%
+renewables_share_energy,USA,2022,10.875,%
+renewables_share_energy,USA,2023,11.212,%
+renewables_share_energy,WLD,1990,6.796,%
+renewables_share_energy,WLD,2000,7.426,%
+renewables_share_energy,WLD,2005,7.192,%
+renewables_share_energy,WLD,2010,8.37,%
+renewables_share_energy,WLD,2011,8.549,%
+renewables_share_energy,WLD,2012,8.963,%
+renewables_share_energy,WLD,2013,9.367,%
+renewables_share_energy,WLD,2014,9.732,%
+renewables_share_energy,WLD,2015,10,%
+renewables_share_energy,WLD,2016,10.431,%
+renewables_share_energy,WLD,2017,10.793,%
+renewables_share_energy,WLD,2018,11.202,%
+renewables_share_energy,WLD,2019,11.651,%
+renewables_share_energy,WLD,2020,12.781,%
+renewables_share_energy,WLD,2021,12.861,%
+renewables_share_energy,WLD,2022,13.504,%
+renewables_share_energy,WLD,2023,13.943,%
+total_ghg_excluding_lucf,BRA,1990,331.942,Mt CO2e
+total_ghg_excluding_lucf,BRA,2000,486.913,Mt CO2e
+total_ghg_excluding_lucf,BRA,2005,523.08,Mt CO2e
+total_ghg_excluding_lucf,BRA,2010,603.66,Mt CO2e
+total_ghg_excluding_lucf,BRA,2011,622.712,Mt CO2e
+total_ghg_excluding_lucf,BRA,2012,660.657,Mt CO2e
+total_ghg_excluding_lucf,BRA,2013,698.02,Mt CO2e
+total_ghg_excluding_lucf,BRA,2014,726.699,Mt CO2e
+total_ghg_excluding_lucf,BRA,2015,702.269,Mt CO2e
+total_ghg_excluding_lucf,BRA,2016,665.929,Mt CO2e
+total_ghg_excluding_lucf,BRA,2017,674.878,Mt CO2e
+total_ghg_excluding_lucf,BRA,2018,658.381,Mt CO2e
+total_ghg_excluding_lucf,BRA,2019,661.136,Mt CO2e
+total_ghg_excluding_lucf,BRA,2020,635.026,Mt CO2e
+total_ghg_excluding_lucf,BRA,2021,683.825,Mt CO2e
+total_ghg_excluding_lucf,BRA,2022,673.556,Mt CO2e
+total_ghg_excluding_lucf,BRA,2023,679.513,Mt CO2e
+total_ghg_excluding_lucf,CHN,1990,3050.701,Mt CO2e
+total_ghg_excluding_lucf,CHN,2000,4281.563,Mt CO2e
+total_ghg_excluding_lucf,CHN,2005,6746.289,Mt CO2e
+total_ghg_excluding_lucf,CHN,2010,9600.764,Mt CO2e
+total_ghg_excluding_lucf,CHN,2011,10605.287,Mt CO2e
+total_ghg_excluding_lucf,CHN,2012,10853.954,Mt CO2e
+total_ghg_excluding_lucf,CHN,2013,11041.993,Mt CO2e
+total_ghg_excluding_lucf,CHN,2014,11086.678,Mt CO2e
+total_ghg_excluding_lucf,CHN,2015,10966.92,Mt CO2e
+total_ghg_excluding_lucf,CHN,2016,10814.965,Mt CO2e
+total_ghg_excluding_lucf,CHN,2017,11097.793,Mt CO2e
+total_ghg_excluding_lucf,CHN,2018,11487.489,Mt CO2e
+total_ghg_excluding_lucf,CHN,2019,11888.703,Mt CO2e
+total_ghg_excluding_lucf,CHN,2020,12091.771,Mt CO2e
+total_ghg_excluding_lucf,CHN,2021,12538.149,Mt CO2e
+total_ghg_excluding_lucf,CHN,2022,13031.949,Mt CO2e
+total_ghg_excluding_lucf,CHN,2023,13532.396,Mt CO2e
+total_ghg_excluding_lucf,DEU,1990,1184.151,Mt CO2e
+total_ghg_excluding_lucf,DEU,2000,978.32,Mt CO2e
+total_ghg_excluding_lucf,DEU,2005,929.303,Mt CO2e
+total_ghg_excluding_lucf,DEU,2010,878.144,Mt CO2e
+total_ghg_excluding_lucf,DEU,2011,854.613,Mt CO2e
+total_ghg_excluding_lucf,DEU,2012,862.722,Mt CO2e
+total_ghg_excluding_lucf,DEU,2013,878.829,Mt CO2e
+total_ghg_excluding_lucf,DEU,2014,837.888,Mt CO2e
+total_ghg_excluding_lucf,DEU,2015,845.295,Mt CO2e
+total_ghg_excluding_lucf,DEU,2016,841.167,Mt CO2e
+total_ghg_excluding_lucf,DEU,2017,827.495,Mt CO2e
+total_ghg_excluding_lucf,DEU,2018,800.664,Mt CO2e
+total_ghg_excluding_lucf,DEU,2019,748.862,Mt CO2e
+total_ghg_excluding_lucf,DEU,2020,685.843,Mt CO2e
+total_ghg_excluding_lucf,DEU,2021,717.596,Mt CO2e
+total_ghg_excluding_lucf,DEU,2022,706.251,Mt CO2e
+total_ghg_excluding_lucf,DEU,2023,629.899,Mt CO2e
+total_ghg_excluding_lucf,EUU,1990,4402.955,Mt CO2e
+total_ghg_excluding_lucf,EUU,2000,4035.282,Mt CO2e
+total_ghg_excluding_lucf,EUU,2005,4125.006,Mt CO2e
+total_ghg_excluding_lucf,EUU,2010,3770.308,Mt CO2e
+total_ghg_excluding_lucf,EUU,2011,3665.695,Mt CO2e
+total_ghg_excluding_lucf,EUU,2012,3592.641,Mt CO2e
+total_ghg_excluding_lucf,EUU,2013,3501.906,Mt CO2e
+total_ghg_excluding_lucf,EUU,2014,3352.643,Mt CO2e
+total_ghg_excluding_lucf,EUU,2015,3406.026,Mt CO2e
+total_ghg_excluding_lucf,EUU,2016,3403.527,Mt CO2e
+total_ghg_excluding_lucf,EUU,2017,3429.143,Mt CO2e
+total_ghg_excluding_lucf,EUU,2018,3360.717,Mt CO2e
+total_ghg_excluding_lucf,EUU,2019,3209.388,Mt CO2e
+total_ghg_excluding_lucf,EUU,2020,2918.208,Mt CO2e
+total_ghg_excluding_lucf,EUU,2021,3098.421,Mt CO2e
+total_ghg_excluding_lucf,EUU,2022,3026.502,Mt CO2e
+total_ghg_excluding_lucf,EUU,2023,2764.026,Mt CO2e
+total_ghg_excluding_lucf,FRA,1990,451.254,Mt CO2e
+total_ghg_excluding_lucf,FRA,2000,453.424,Mt CO2e
+total_ghg_excluding_lucf,FRA,2005,459.587,Mt CO2e
+total_ghg_excluding_lucf,FRA,2010,417.321,Mt CO2e
+total_ghg_excluding_lucf,FRA,2011,393.804,Mt CO2e
+total_ghg_excluding_lucf,FRA,2012,396.417,Mt CO2e
+total_ghg_excluding_lucf,FRA,2013,398.033,Mt CO2e
+total_ghg_excluding_lucf,FRA,2014,364.417,Mt CO2e
+total_ghg_excluding_lucf,FRA,2015,367.359,Mt CO2e
+total_ghg_excluding_lucf,FRA,2016,370.86,Mt CO2e
+total_ghg_excluding_lucf,FRA,2017,374.168,Mt CO2e
+total_ghg_excluding_lucf,FRA,2018,359.495,Mt CO2e
+total_ghg_excluding_lucf,FRA,2019,351.154,Mt CO2e
+total_ghg_excluding_lucf,FRA,2020,314.11,Mt CO2e
+total_ghg_excluding_lucf,FRA,2021,340.204,Mt CO2e
+total_ghg_excluding_lucf,FRA,2022,327.29,Mt CO2e
+total_ghg_excluding_lucf,FRA,2023,301.16,Mt CO2e
+total_ghg_excluding_lucf,GBR,1990,709.414,Mt CO2e
+total_ghg_excluding_lucf,GBR,2000,644.17,Mt CO2e
+total_ghg_excluding_lucf,GBR,2005,623.272,Mt CO2e
+total_ghg_excluding_lucf,GBR,2010,542.746,Mt CO2e
+total_ghg_excluding_lucf,GBR,2011,498.398,Mt CO2e
+total_ghg_excluding_lucf,GBR,2012,515.294,Mt CO2e
+total_ghg_excluding_lucf,GBR,2013,502.995,Mt CO2e
+total_ghg_excluding_lucf,GBR,2014,462.865,Mt CO2e
+total_ghg_excluding_lucf,GBR,2015,445.941,Mt CO2e
+total_ghg_excluding_lucf,GBR,2016,422.051,Mt CO2e
+total_ghg_excluding_lucf,GBR,2017,410.492,Mt CO2e
+total_ghg_excluding_lucf,GBR,2018,403.013,Mt CO2e
+total_ghg_excluding_lucf,GBR,2019,387.597,Mt CO2e
+total_ghg_excluding_lucf,GBR,2020,348.027,Mt CO2e
+total_ghg_excluding_lucf,GBR,2021,364.653,Mt CO2e
+total_ghg_excluding_lucf,GBR,2022,333.067,Mt CO2e
+total_ghg_excluding_lucf,GBR,2023,329.246,Mt CO2e
+total_ghg_excluding_lucf,IND,1990,768.946,Mt CO2e
+total_ghg_excluding_lucf,IND,2000,1212.075,Mt CO2e
+total_ghg_excluding_lucf,IND,2005,1445.262,Mt CO2e
+total_ghg_excluding_lucf,IND,2010,1973.835,Mt CO2e
+total_ghg_excluding_lucf,IND,2011,2072.287,Mt CO2e
+total_ghg_excluding_lucf,IND,2012,2245.158,Mt CO2e
+total_ghg_excluding_lucf,IND,2013,2286.255,Mt CO2e
+total_ghg_excluding_lucf,IND,2014,2449.302,Mt CO2e
+total_ghg_excluding_lucf,IND,2015,2539.29,Mt CO2e
+total_ghg_excluding_lucf,IND,2016,2663.638,Mt CO2e
+total_ghg_excluding_lucf,IND,2017,2741.299,Mt CO2e
+total_ghg_excluding_lucf,IND,2018,2923.173,Mt CO2e
+total_ghg_excluding_lucf,IND,2019,2937.495,Mt CO2e
+total_ghg_excluding_lucf,IND,2020,2742.09,Mt CO2e
+total_ghg_excluding_lucf,IND,2021,3013.546,Mt CO2e
+total_ghg_excluding_lucf,IND,2022,3185.276,Mt CO2e
+total_ghg_excluding_lucf,IND,2023,3431.968,Mt CO2e
+total_ghg_excluding_lucf,USA,1990,5886.553,Mt CO2e
+total_ghg_excluding_lucf,USA,2000,6723.977,Mt CO2e
+total_ghg_excluding_lucf,USA,2005,6792.139,Mt CO2e
+total_ghg_excluding_lucf,USA,2010,6307.125,Mt CO2e
+total_ghg_excluding_lucf,USA,2011,6186.227,Mt CO2e
+total_ghg_excluding_lucf,USA,2012,5962.164,Mt CO2e
+total_ghg_excluding_lucf,USA,2013,6108.991,Mt CO2e
+total_ghg_excluding_lucf,USA,2014,6180.719,Mt CO2e
+total_ghg_excluding_lucf,USA,2015,6005.932,Mt CO2e
+total_ghg_excluding_lucf,USA,2016,5852.134,Mt CO2e
+total_ghg_excluding_lucf,USA,2017,5815.081,Mt CO2e
+total_ghg_excluding_lucf,USA,2018,6005.333,Mt CO2e
+total_ghg_excluding_lucf,USA,2019,5899.809,Mt CO2e
+total_ghg_excluding_lucf,USA,2020,5309.856,Mt CO2e
+total_ghg_excluding_lucf,USA,2021,5675.305,Mt CO2e
+total_ghg_excluding_lucf,USA,2022,5728.265,Mt CO2e
+total_ghg_excluding_lucf,USA,2023,5606.243,Mt CO2e
+total_ghg_excluding_lucf,WLD,1990,26666.188,Mt CO2e
+total_ghg_excluding_lucf,WLD,2000,29457.48,Mt CO2e
+total_ghg_excluding_lucf,WLD,2005,33687.422,Mt CO2e
+total_ghg_excluding_lucf,WLD,2010,37505.77,Mt CO2e
+total_ghg_excluding_lucf,WLD,2011,38830.555,Mt CO2e
+total_ghg_excluding_lucf,WLD,2012,39379.574,Mt CO2e
+total_ghg_excluding_lucf,WLD,2013,39676.91,Mt CO2e
+total_ghg_excluding_lucf,WLD,2014,39923.324,Mt CO2e
+total_ghg_excluding_lucf,WLD,2015,39824.973,Mt CO2e
+total_ghg_excluding_lucf,WLD,2016,39812.508,Mt CO2e
+total_ghg_excluding_lucf,WLD,2017,40479.066,Mt CO2e
+total_ghg_excluding_lucf,WLD,2018,41362.039,Mt CO2e
+total_ghg_excluding_lucf,WLD,2019,41798.785,Mt CO2e
+total_ghg_excluding_lucf,WLD,2020,40091.508,Mt CO2e
+total_ghg_excluding_lucf,WLD,2021,41943.742,Mt CO2e
+total_ghg_excluding_lucf,WLD,2022,42687.125,Mt CO2e
+total_ghg_excluding_lucf,WLD,2023,43274.887,Mt CO2e

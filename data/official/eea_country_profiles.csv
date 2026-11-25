@@ -1,0 +1,163 @@
+series,entity,year,value,unit
+EEA-SOE2025.final-energy-consumption,DEU,2005,100,index 2005=100
+EEA-SOE2025.final-energy-consumption,DEU,2010,101.3158,index 2005=100
+EEA-SOE2025.final-energy-consumption,DEU,2011,96.19,index 2005=100
+EEA-SOE2025.final-energy-consumption,DEU,2012,97.9616,index 2005=100
+EEA-SOE2025.final-energy-consumption,DEU,2013,100.5138,index 2005=100
+EEA-SOE2025.final-energy-consumption,DEU,2014,95.2755,index 2005=100
+EEA-SOE2025.final-energy-consumption,DEU,2015,96.5517,index 2005=100
+EEA-SOE2025.final-energy-consumption,DEU,2016,98.493,index 2005=100
+EEA-SOE2025.final-energy-consumption,DEU,2017,99.271,index 2005=100
+EEA-SOE2025.final-energy-consumption,DEU,2018,97.5821,index 2005=100
+EEA-SOE2025.final-energy-consumption,DEU,2019,97.5541,index 2005=100
+EEA-SOE2025.final-energy-consumption,DEU,2020,92.0226,index 2005=100
+EEA-SOE2025.final-energy-consumption,DEU,2021,94.2021,index 2005=100
+EEA-SOE2025.final-energy-consumption,DEU,2022,91.7969,index 2005=100
+EEA-SOE2025.final-energy-consumption,DEU,2023,87.1634,index 2005=100
+EEA-SOE2025.final-energy-consumption,EUU,2005,100,index 2005=100
+EEA-SOE2025.final-energy-consumption,EUU,2010,98.6699,index 2005=100
+EEA-SOE2025.final-energy-consumption,EUU,2011,94.8831,index 2005=100
+EEA-SOE2025.final-energy-consumption,EUU,2012,94.7171,index 2005=100
+EEA-SOE2025.final-energy-consumption,EUU,2013,94.5217,index 2005=100
+EEA-SOE2025.final-energy-consumption,EUU,2014,90.3467,index 2005=100
+EEA-SOE2025.final-energy-consumption,EUU,2015,92.4057,index 2005=100
+EEA-SOE2025.final-energy-consumption,EUU,2016,94.3056,index 2005=100
+EEA-SOE2025.final-energy-consumption,EUU,2017,95.4523,index 2005=100
+EEA-SOE2025.final-energy-consumption,EUU,2018,95.7601,index 2005=100
+EEA-SOE2025.final-energy-consumption,EUU,2019,95.2311,index 2005=100
+EEA-SOE2025.final-energy-consumption,EUU,2020,87.6264,index 2005=100
+EEA-SOE2025.final-energy-consumption,EUU,2021,93.1668,index 2005=100
+EEA-SOE2025.final-energy-consumption,EUU,2022,90.5932,index 2005=100
+EEA-SOE2025.final-energy-consumption,EUU,2023,87.8589,index 2005=100
+EEA-SOE2025.final-energy-consumption,FRA,2005,100,index 2005=100
+EEA-SOE2025.final-energy-consumption,FRA,2010,96.4571,index 2005=100
+EEA-SOE2025.final-energy-consumption,FRA,2011,93.7722,index 2005=100
+EEA-SOE2025.final-energy-consumption,FRA,2012,96.6198,index 2005=100
+EEA-SOE2025.final-energy-consumption,FRA,2013,98.3017,index 2005=100
+EEA-SOE2025.final-energy-consumption,FRA,2014,91.0553,index 2005=100
+EEA-SOE2025.final-energy-consumption,FRA,2015,93.1917,index 2005=100
+EEA-SOE2025.final-energy-consumption,FRA,2016,94.6575,index 2005=100
+EEA-SOE2025.final-energy-consumption,FRA,2017,93.9793,index 2005=100
+EEA-SOE2025.final-energy-consumption,FRA,2018,92.8762,index 2005=100
+EEA-SOE2025.final-energy-consumption,FRA,2019,91.9407,index 2005=100
+EEA-SOE2025.final-energy-consumption,FRA,2020,82.073,index 2005=100
+EEA-SOE2025.final-energy-consumption,FRA,2021,89.2584,index 2005=100
+EEA-SOE2025.final-energy-consumption,FRA,2022,86.6541,index 2005=100
+EEA-SOE2025.final-energy-consumption,FRA,2023,83.1737,index 2005=100
+EEA-SOE2025.renewable-energy-sources,DEU,2005,7.167,%
+EEA-SOE2025.renewable-energy-sources,DEU,2010,11.667,%
+EEA-SOE2025.renewable-energy-sources,DEU,2011,12.47,%
+EEA-SOE2025.renewable-energy-sources,DEU,2012,13.549,%
+EEA-SOE2025.renewable-energy-sources,DEU,2013,13.757,%
+EEA-SOE2025.renewable-energy-sources,DEU,2014,14.381,%
+EEA-SOE2025.renewable-energy-sources,DEU,2015,14.901,%
+EEA-SOE2025.renewable-energy-sources,DEU,2016,14.885,%
+EEA-SOE2025.renewable-energy-sources,DEU,2017,15.472,%
+EEA-SOE2025.renewable-energy-sources,DEU,2018,16.66,%
+EEA-SOE2025.renewable-energy-sources,DEU,2019,17.266,%
+EEA-SOE2025.renewable-energy-sources,DEU,2020,19.09,%
+EEA-SOE2025.renewable-energy-sources,DEU,2021,19.281,%
+EEA-SOE2025.renewable-energy-sources,DEU,2022,20.929,%
+EEA-SOE2025.renewable-energy-sources,DEU,2023,21.547,%
+EEA-SOE2025.renewable-energy-sources,EUU,2005,10.182,%
+EEA-SOE2025.renewable-energy-sources,EUU,2010,14.405,%
+EEA-SOE2025.renewable-energy-sources,EUU,2011,14.547,%
+EEA-SOE2025.renewable-energy-sources,EUU,2012,16.002,%
+EEA-SOE2025.renewable-energy-sources,EUU,2013,16.659,%
+EEA-SOE2025.renewable-energy-sources,EUU,2014,17.416,%
+EEA-SOE2025.renewable-energy-sources,EUU,2015,17.82,%
+EEA-SOE2025.renewable-energy-sources,EUU,2016,17.978,%
+EEA-SOE2025.renewable-energy-sources,EUU,2017,18.411,%
+EEA-SOE2025.renewable-energy-sources,EUU,2018,19.096,%
+EEA-SOE2025.renewable-energy-sources,EUU,2019,19.887,%
+EEA-SOE2025.renewable-energy-sources,EUU,2020,22.038,%
+EEA-SOE2025.renewable-energy-sources,EUU,2021,21.893,%
+EEA-SOE2025.renewable-energy-sources,EUU,2022,23.103,%
+EEA-SOE2025.renewable-energy-sources,EUU,2023,24.551,%
+EEA-SOE2025.renewable-energy-sources,FRA,2005,9.272,%
+EEA-SOE2025.renewable-energy-sources,FRA,2010,12.671,%
+EEA-SOE2025.renewable-energy-sources,FRA,2011,10.813,%
+EEA-SOE2025.renewable-energy-sources,FRA,2012,13.239,%
+EEA-SOE2025.renewable-energy-sources,FRA,2013,13.88,%
+EEA-SOE2025.renewable-energy-sources,FRA,2014,14.362,%
+EEA-SOE2025.renewable-energy-sources,FRA,2015,14.803,%
+EEA-SOE2025.renewable-energy-sources,FRA,2016,15.451,%
+EEA-SOE2025.renewable-energy-sources,FRA,2017,15.847,%
+EEA-SOE2025.renewable-energy-sources,FRA,2018,16.384,%
+EEA-SOE2025.renewable-energy-sources,FRA,2019,17.174,%
+EEA-SOE2025.renewable-energy-sources,FRA,2020,19.109,%
+EEA-SOE2025.renewable-energy-sources,FRA,2021,19.316,%
+EEA-SOE2025.renewable-energy-sources,FRA,2022,20.445,%
+EEA-SOE2025.renewable-energy-sources,FRA,2023,22.283,%
+EEA-SOE2025.total-greenhouse-gas-emissions,DEU,1990,100,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,DEU,2000,83.2281,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,DEU,2005,79.028,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,DEU,2010,74.2775,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,DEU,2011,72.4,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,DEU,2012,73.2193,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,DEU,2013,74.5758,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,DEU,2014,71.3471,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,DEU,2015,72.008,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,DEU,2016,71.6456,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,DEU,2017,70.4435,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,DEU,2018,68.0981,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,DEU,2019,63.7216,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,DEU,2020,58.5272,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,DEU,2021,60.7975,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,DEU,2022,59.7887,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,DEU,2023,53.6587,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,EUU,1990,100,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,EUU,2000,91.4281,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,EUU,2005,93.2977,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,EUU,2010,85.7172,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,EUU,2011,83.4653,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,EUU,2012,82.0118,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,EUU,2013,80.1771,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,EUU,2014,77.2595,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,EUU,2015,78.2632,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,EUU,2016,78.1941,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,EUU,2017,78.627,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,EUU,2018,76.9591,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,EUU,2019,73.6331,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,EUU,2020,67.6613,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,EUU,2021,71.1037,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,EUU,2022,69.2756,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,EUU,2023,63.7369,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,FRA,1990,100,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,FRA,2000,100.8306,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,FRA,2005,101.5648,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,FRA,2010,93.8113,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,FRA,2011,89.3023,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,FRA,2012,89.7602,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,FRA,2013,89.598,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,FRA,2014,83.5712,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,FRA,2015,84.179,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,FRA,2016,84.6254,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,FRA,2017,85.0853,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,FRA,2018,81.555,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,FRA,2019,79.7811,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,FRA,2020,72.4652,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,FRA,2021,76.7978,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,FRA,2022,73.8134,index 1990=100
+EEA-SOE2025.total-greenhouse-gas-emissions,FRA,2023,68.8648,index 1990=100
+EEA-SOE2025.waste-generation,DEU,2010,100,index 2010=100
+EEA-SOE2025.waste-generation,DEU,2012,102.924,index 2010=100
+EEA-SOE2025.waste-generation,DEU,2014,107.6248,index 2010=100
+EEA-SOE2025.waste-generation,DEU,2016,109.2668,index 2010=100
+EEA-SOE2025.waste-generation,DEU,2018,110.009,index 2010=100
+EEA-SOE2025.waste-generation,DEU,2020,108.502,index 2010=100
+EEA-SOE2025.waste-generation,DEU,2022,103.5538,index 2010=100
+EEA-SOE2025.waste-generation,EUU,2010,100,index 2010=100
+EEA-SOE2025.waste-generation,EUU,2012,101.3753,index 2010=100
+EEA-SOE2025.waste-generation,EUU,2014,100.897,index 2010=100
+EEA-SOE2025.waste-generation,EUU,2016,101.1361,index 2010=100
+EEA-SOE2025.waste-generation,EUU,2018,104.3452,index 2010=100
+EEA-SOE2025.waste-generation,EUU,2020,96.0136,index 2010=100
+EEA-SOE2025.waste-generation,EUU,2022,99.4818,index 2010=100
+EEA-SOE2025.waste-generation,FRA,2010,100,index 2010=100
+EEA-SOE2025.waste-generation,FRA,2012,96.0935,index 2010=100
+EEA-SOE2025.waste-generation,FRA,2014,89.3209,index 2010=100
+EEA-SOE2025.waste-generation,FRA,2016,88.2804,index 2010=100
+EEA-SOE2025.waste-generation,FRA,2018,93.3187,index 2010=100
+EEA-SOE2025.waste-generation,FRA,2020,83.5524,index 2010=100
+EEA-SOE2025.waste-generation,FRA,2022,92.6616,index 2010=100
